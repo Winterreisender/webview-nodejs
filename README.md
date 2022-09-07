@@ -4,21 +4,14 @@ An experimental Node.js binding to webview
 
 ## Getting Started
 
-1. Copy `webview.dll` and `WebView2Loader.dll` or `webview.so` to the working folder. You can build them yourself or download them [here](https://github.com/Winterreisender/webview_nativebuild/releases).
-2. Run `npm start`
-
-### Use webview-nodejs in you project
-
-There's not a npm package now. You need:
-
-1. Install `ffi-napi`
+1. Install via npm
 ```shell
-npm i ffi-napi
+npm i webview-nodejs
 ```
-2. Copy [Webview.js](https://github.com/Winterreisender/webview-nodejs/blob/master/Webview.js) to your project
+2. Copy `webview.dll` and `WebView2Loader.dll` or `webview.so` to the working folder. You can build them yourself or download them [here](https://github.com/Winterreisender/webview_nativebuild/releases)
 3. Import Webview and use webview
 ```js
-import Webview from "./Webview.js";
+import Webview from "webview-nodejs";
 
 let w = new Webview(1);
 w.title("Hello");
