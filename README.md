@@ -4,7 +4,7 @@ An experimental Node.js binding to webview
 
 ## Getting Started
 
-1. Copy `webview.dll` and `WebView2Loader.dll` or `webview.so` to the working folder.
+1. Copy `webview.dll` and `WebView2Loader.dll` or `webview.so` to the working folder. You can build them yourself or download them [here](https://github.com/Winterreisender/webview_nativebuild/releases).
 2. Run `npm start`
 
 ## Contribution
