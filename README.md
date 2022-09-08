@@ -8,7 +8,7 @@ An experimental Node.js binding to webview
 ```shell
 npm i webview-nodejs
 ```
-2. Copy `webview.dll` and `WebView2Loader.dll` or `webview.so` to the working folder. You can build them yourself or download them [here](https://github.com/Winterreisender/webview_nativebuild/releases)
+2. Copy `WebView2Loader.dll` to the working folder. You can find it in `libs/win32/x64/WebView2Loader.dll`
 3. Import Webview and use webview
 ```js
 import Webview from "webview-nodejs";
@@ -39,6 +39,8 @@ All suggestions, pull requests, issues and other contributions are welcome and a
 |------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                                    |
 | [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)                        |
+| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [See the License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
+
 
 # License
 

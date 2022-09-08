@@ -1,8 +1,9 @@
-import {Library, Callback, LIB_EXT} from 'ffi-napi';
+const {Library, Callback, LIB_EXT} = require('ffi-napi');
+var path = require("path")
 
-export default class Webview {
-    constructor(debug=0) {
-        this.lib = Library('webview' + LIB_EXT, { 
+class Webview {
+    constructor(debug=0,libPath = this.getLibraryPath()) {
+        this.lib = Library(libPath, { 
             'webview_create'   : [ 'pointer', [ 'int', 'pointer' ] ],
             'webview_run'      : [ 'void'   , [ 'pointer' ] ],
             'webview_terminate': [ 'void'   , [ 'pointer' ] ],
@@ -84,4 +85,20 @@ export default class Webview {
     terminate() {
         this.lib.webview_terminate(this.webview)
     }
+
+    getLibraryPath() {
+        var dir = __dirname;
+        var arch = process.arch;
+        var libName = 'libwebview' + LIB_EXT;
+        var platform = process.platform;
+        if(['linux','win32','darwin'].includes(platform) && arch == 'x64') {
+            return path.join(dir,'libs',platform,arch,libName)
+        }else{
+            throw new ReferenceError("Unsupported pattform: " + platform + arch);
+        }
+    }
 }
+
+
+module.exports = exports = Webview
+

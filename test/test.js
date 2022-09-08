@@ -1,4 +1,8 @@
-import Webview from "./Webview.js";
+//import Webview from "../webview.js";
+
+const Webview = require('../webview.js')
+
+// RPATH Issue https://github.com/node-ffi-napi/node-ffi-napi/issues/158
 
 function main() {
     let w = new Webview(1);
