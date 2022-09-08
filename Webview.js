@@ -1,5 +1,6 @@
 const {Library, Callback, LIB_EXT} = require('ffi-napi');
-var path = require("path")
+var path = require('path')
+var fs = require('fs')
 
 class Webview {
     constructor(debug=0,libPath = this.getLibraryPath()) {
@@ -89,8 +90,17 @@ class Webview {
     getLibraryPath() {
         var dir = __dirname;
         var arch = process.arch;
-        var libName = 'libwebview' + LIB_EXT;
         var platform = process.platform;
+        var libName = 'libwebview' + LIB_EXT;
+        if(platform == 'win32'){
+            libName = libName.replace(/^(lib)/,'');
+            // Copy dlls
+            var dst = path.join('.','WebView2Loader.dll');
+            if(!fs.existsSync(dst)) {
+                fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
+            }
+        }
+        
         if(['linux','win32','darwin'].includes(platform) && arch == 'x64') {
             return path.join(dir,'libs',platform,arch,libName)
         }else{

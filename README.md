@@ -1,6 +1,12 @@
 # webview-nodejs
 
-An experimental Node.js binding to webview
+[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
+![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
+![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
+
+
+A Node.js binding to [webview](https://github.com/webview/webview)
+
 
 ## Getting Started
 
@@ -8,8 +14,7 @@ An experimental Node.js binding to webview
 ```shell
 npm i webview-nodejs
 ```
-2. Copy `WebView2Loader.dll` to the working folder. You can find it in `libs/win32/x64/WebView2Loader.dll`
-3. Import Webview and use webview
+2. Import Webview and use webview
 ```js
 import Webview from "webview-nodejs";
 
@@ -28,6 +33,12 @@ w.bind("increment", (it)=>{
 w.show();
 ```
 
+## Supported Platforms
+
+- win32 x64
+- linux x64
+- osx x64
+- osx aarch64
 
 ## Contribution
 
@@ -39,8 +50,9 @@ All suggestions, pull requests, issues and other contributions are welcome and a
 |------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                                    |
 | [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)                        |
-| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [See the License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
+| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [Microsoft WebView2 License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
 
+libs are from [webview_deno](https://github.com/webview/webview_deno)
 
 # License
 

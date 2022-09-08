@@ -1,8 +1,11 @@
 {
   "name": "webview-nodejs",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "homepage": "https://github.com/Winterreisender/webview-nodejs",
   "description": "An experimental nodejs binding to webview",
+  "license": "Apache-2.0",
+  "main": "webview.js",
+  "types": "webview.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Winterreisender/webview-nodejs.git"
@@ -14,19 +17,13 @@
     "webview",
     "webui"
   ],
-  "main": "webview.js",
   "scripts": {
     "test": "node test/test.js"
   },
-  "license": "Apache-2.0",
   "dependencies": {
     "ffi-napi": "^4.0.3"
   },
   "engines": {
     "node": ">=10"
-  },
-  "files": [
-    "webview.js",
-    "README.md"
-  ]
+  }
 }
