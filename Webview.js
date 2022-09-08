@@ -21,6 +21,18 @@ class Webview {
             'webview_set_size' : [ 'void'   , [ 'pointer', 'int', 'int', 'int' ] ],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0,null);
+
+        /** Window size hints */
+        this.WindowHint = {
+            /** Width and height are default size */
+            NONE: 0,
+            /** Width and height are minimum bounds */
+            MIN: 1,
+            /** Width and height are maximum bounds */
+            MAX: 2,
+            /** Window size can not be changed by a user */
+            FIXED: 3,
+        };
     }
 
     title(v) {

@@ -1,6 +1,6 @@
 const webview = require('../webview')
 
-function main() {
+function makeWebview() {
     let w = new webview.Webview(true);
     w.title("Hello");
     w.size(600,600,0);
@@ -12,7 +12,14 @@ function main() {
         w.title()
         return num + inc
     });
-    w.show();
+    return w;
+}
+
+function main() {
+    let w1 = makeWebview();
+    let w2 = makeWebview();
+
+    Promise.all([w1.show(),w2.show()])
 }
 
 main()

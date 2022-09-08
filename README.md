@@ -33,6 +33,9 @@ w.bind("increment", (w,num,inc)=>{
 w.show();
 ```
 
+## Help
+
+- API Docs: [webview.d.ts](webview.d.ts)
 
 ## Supported Platforms
 
