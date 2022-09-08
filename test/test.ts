@@ -8,10 +8,8 @@ function main() {
     w.dispatch(()=>{
         w.title("World")
     });
-    w.bind("increment", (it)=>{
-        console.log(it);
-        it = JSON.parse(it);
-        return (it[0]+1).toString();
+    w.bind("increment", (w,num,inc)=>{
+        return num + inc
     });
     w.show();
 }

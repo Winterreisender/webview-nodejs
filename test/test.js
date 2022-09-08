@@ -1,17 +1,16 @@
 const webview = require('../webview')
 
 function main() {
-    let w = new webview.Webview();
+    let w = new webview.Webview(true);
     w.title("Hello");
     w.size(600,600,0);
     w.navigate("https://example.com");
     w.dispatch(()=>{
         w.title("World")
     });
-    w.bind("increment", (it)=>{
-        console.log(it);
-        it = JSON.parse(it);
-        return (it[0]+1).toString();
+    w.bind("increment", (w,num,inc)=>{
+        w.title()
+        return num + inc
     });
     w.show();
 }

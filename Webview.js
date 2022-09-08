@@ -1,6 +1,6 @@
 const {Library, Callback, LIB_EXT} = require('ffi-napi');
-var path = require('path')
-var fs = require('fs')
+let path = require('path')
+let fs = require('fs')
 
 class Webview {
     constructor(debug=false,libPath = this.getLibraryPath()) {
@@ -47,28 +47,33 @@ class Webview {
         this.lib.webview_eval(this.webview,js)
     }
 
-    // fn: String->String
-    bind(name,fn) {
-        var resolve = (function (seq,result,isError) { this.lib.webview_return(this.webview,seq,isError,result); }).bind(this);
-        var callback = Callback('void',['string','string','pointer'], function(seq,req,arg) {
-            var isError = 0;
-            var result = "";
-            try {
-                result = fn(req);
-            } catch (error) {
-                isError = 1;
-                result = JSON.stringify(error);
-            }
-            resolve(seq,result,0);
+    // fn :(req :string,w :Webview)=>[boolean,string]
+    bindRaw(name,fn) {
+        let callback = Callback('void',['string','string','pointer'], (seq,req,arg) => {
+            const [isSuccess,result] = fn(this,req)
+            this.lib.webview_return(this.webview,seq,isSuccess?0:1,result);
         });
         this.lib.webview_bind(this.webview, name, callback, null);
         process.on('exit', function() { callback; });
     }
 
+    // fn :(...args :any, w :Webview)=>any
+    bind(name,fn) {
+        this.bindRaw(name, (w,req)=>{
+            let args = JSON.parse(req); // [object]
+            
+            try {
+                return [true,JSON.stringify(fn(w,...args))];
+            } catch(error) {
+                return [false, JSON.stringify(error)]
+            }
+        })
+    }
+
     // fn: ()->()
     dispatch(fn) {
-        var callback = Callback('void',['pointer','pointer'], function (w,arg) {
-            fn();
+        let callback = Callback('void',['pointer','pointer'], (_,arg) => {
+            fn(this);
         });
         this.lib.webview_dispatch(this.webview,callback);
         process.on('exit', function() { callback; });
@@ -88,14 +93,14 @@ class Webview {
     }
 
     getLibraryPath() {
-        var dir = __dirname;
-        var arch = process.arch;
-        var platform = process.platform;
-        var libName = 'libwebview' + LIB_EXT;
+        let dir = __dirname;
+        let arch = process.arch;
+        let platform = process.platform;
+        let libName = 'libwebview' + LIB_EXT;
         if(platform == 'win32'){
             libName = libName.replace(/^(lib)/,'');
             // Copy dlls
-            var dst = path.join('.','WebView2Loader.dll');
+            let dst = path.join('.','WebView2Loader.dll');
             if(!fs.existsSync(dst)) {
                 fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
             }

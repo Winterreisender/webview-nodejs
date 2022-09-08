@@ -18,9 +18,11 @@ export declare class Webview {
 
     public eval(js :string) :void
 
-    public bind(name :string,fn :(req :string)=>string) :void
+    public bindRaw(name :string,fn :(w :Webview, req :string)=>[boolean,string]) :void
 
-    public dispatch(fn :()=>void) :void
+    public bind(name :string, fn :(w :Webview, ...args :any)=>any ) :void
+
+    public dispatch(fn :(w :Webview)=>void) :void
 
     public unbind(name :string) :void
 

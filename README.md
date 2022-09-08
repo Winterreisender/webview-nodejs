@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
 ![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
+![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
 
 
 A Node.js binding to [webview](https://github.com/webview/webview)
@@ -18,21 +19,18 @@ npm i webview-nodejs
 ```js
 const webview = require('webview-nodejs');
 
-function main() {
-    let w = new webview.Webview();
-    w.title("Hello");
-    w.size(600,600,0);
-    w.navigate("https://example.com");
-    w.dispatch(()=>{
-        w.title("World")
-    });
-    w.bind("increment", (it)=>{
-        console.log(it);
-        it = JSON.parse(it);
-        return (it[0]+1).toString();
-    });
-    w.show();
-}
+let w = new webview.Webview(true);
+w.title("Hello");
+w.size(600,600,0);
+w.navigate("https://example.com");
+w.dispatch(()=>{
+    w.title("World")
+});
+w.bind("increment", (w,num,inc)=>{
+    w.title()
+    return num + inc;
+});
+w.show();
 ```
 
 
