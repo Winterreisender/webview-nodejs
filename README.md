@@ -14,24 +14,27 @@ A Node.js binding to [webview](https://github.com/webview/webview)
 ```shell
 npm i webview-nodejs
 ```
-2. Import Webview and use webview
+2. Import and use webview
 ```js
-import Webview from "webview-nodejs";
+const webview = require('webview-nodejs');
 
-let w = new Webview(1);
-w.title("Hello");
-w.size(600,600,0);
-w.navigate("https://example.com");
-w.dispatch(()=>{
-    w.title("World")
-});
-w.bind("increment", (it)=>{
-    console.log(it);
-    it = JSON.parse(it);
-    return (it[0]+1).toString();
-});
-w.show();
+function main() {
+    let w = new webview.Webview();
+    w.title("Hello");
+    w.size(600,600,0);
+    w.navigate("https://example.com");
+    w.dispatch(()=>{
+        w.title("World")
+    });
+    w.bind("increment", (it)=>{
+        console.log(it);
+        it = JSON.parse(it);
+        return (it[0]+1).toString();
+    });
+    w.show();
+}
 ```
+
 
 ## Supported Platforms
 

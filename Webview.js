@@ -3,7 +3,7 @@ var path = require('path')
 var fs = require('fs')
 
 class Webview {
-    constructor(debug=0,libPath = this.getLibraryPath()) {
+    constructor(debug=false,libPath = this.getLibraryPath()) {
         this.lib = Library(libPath, { 
             'webview_create'   : [ 'pointer', [ 'int', 'pointer' ] ],
             'webview_run'      : [ 'void'   , [ 'pointer' ] ],
@@ -20,7 +20,7 @@ class Webview {
             'webview_unbind'   : [ 'void'   , [ 'pointer', 'string' ] ],
             'webview_set_size' : [ 'void'   , [ 'pointer', 'int', 'int', 'int' ] ],
         });
-        this.webview = this.lib.webview_create(debug,null);
+        this.webview = this.lib.webview_create(debug ? 1 : 0,null);
     }
 
     title(v) {
@@ -110,5 +110,5 @@ class Webview {
 }
 
 
-module.exports = exports = Webview
+module.exports = exports = { Webview }
 

@@ -1,11 +1,10 @@
-import fs from 'fs';
-import ffi from 'ffi-napi'
 
-declare class Webview {
-    lib :any
-    webview :any
 
-    constructor(debug: boolean,libPath :fs.PathLike)
+export declare class Webview {
+    declare lib :any
+    declare webview :any
+
+    constructor(debug?: boolean,libPath? :string)
 
     public title(v :string) :void
 
@@ -29,5 +28,5 @@ declare class Webview {
 
     public terminate() :void
 
-    public getLibraryPath() :fs.PathLike
+    public getLibraryPath() :string
 }
