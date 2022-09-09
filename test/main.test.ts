@@ -1,6 +1,8 @@
-import {Webview} from "../webview";
+import {Webview} from '../webview';
+import {test} from '@jest/globals'
 
-function main() {
+
+test('ts demo',()=>{
     let w = new Webview();
     w.title("Hello");
     w.size(600,600,0);
@@ -12,6 +14,4 @@ function main() {
         return num + inc
     });
     w.show();
-}
-
-main()
+})
