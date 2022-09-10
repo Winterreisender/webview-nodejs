@@ -1,4 +1,4 @@
-import {Webview} from '../webview';
+import {Webview} from '../dist/webview';
 import {test} from '@jest/globals'
 
 
