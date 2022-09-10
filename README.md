@@ -17,18 +17,18 @@ npm i webview-nodejs
 ```
 2. Import and use webview
 ```js
-const webview = require('webview-nodejs');
+import {Webview} from "webview-nodejs";
 
-let w = new webview.Webview(true);
+let w = new Webview(true);
 w.title("Hello");
 w.size(600,600,0);
 w.navigate("https://example.com");
 w.dispatch(()=>{
     w.title("World")
 });
-w.bind("increment", (w,num,inc)=>{
-    w.title()
-    return num + inc;
+w.bind("increment", (w,i,inc)=>{
+    console.log(i);
+    return i+inc;
 });
 w.show();
 ```
