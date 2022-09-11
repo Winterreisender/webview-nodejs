@@ -19,7 +19,7 @@ npm i webview-nodejs
 ```js
 const {Webview} = require('webview-nodejs');
 
-let w = new Webview(true);
+let w = new Webview();
 w.title("Hello");
 w.size(600,600);
 w.navigate("https://example.com");
@@ -36,6 +36,7 @@ w.show();
 ## Help
 
 - [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
+- [Examples](test/)
 
 ## Supported Platforms
 

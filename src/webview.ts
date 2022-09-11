@@ -19,7 +19,6 @@ export const SizeHint = {
 } as const;
 
 export type pointer = Pointer<unknown>;
-export type BindCallback = Pointer<(...args: ("string" | "pointer")[]) => void>
 export type webview_t = Pointer<unknown>;
 export type WebviewFFI = {
     webview_create    : ForeignFunction<webview_t, [number, pointer]>,
@@ -32,7 +31,7 @@ export type WebviewFFI = {
     webview_init      : ForeignFunction<void, [webview_t, string]>,
     webview_eval      : ForeignFunction<void, [webview_t, string]>,
     webview_dispatch  : ForeignFunction<void, [webview_t, pointer]>,
-    webview_bind      : ForeignFunction<void, [webview_t, string, BindCallback, pointer ]>,
+    webview_bind      : ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, pointer ]>,
     webview_return    : ForeignFunction<void, [webview_t, string, number, string ]>,
     webview_unbind    : ForeignFunction<void, [webview_t, string]>,
     webview_set_size  : ForeignFunction<void, [webview_t, number,number,number]>,
@@ -210,7 +209,7 @@ export class Webview {
         this.bindRaw(name, (w: any,req: string)=>{
             let args :any[] = JSON.parse(req);
             try {
-                return [true,JSON.stringify(fn(w,...args))];
+                return [true,  JSON.stringify(fn(w,...args))];
             } catch(error) {
                 return [false, JSON.stringify(error)]
             }
@@ -224,7 +223,7 @@ export class Webview {
     *
     * @param fn the function to be executed on the main thread.
     */
-    dispatch(fn: (arg0: this) => void) {
+    dispatch(fn: (webview: Webview) => void) {
         let callback = Callback('void',['pointer','pointer'], (_,arg) => {
             fn(this);
         });
