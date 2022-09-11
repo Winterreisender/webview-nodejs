@@ -3,10 +3,25 @@ import {Pointer} from 'ref-napi';
 import path from 'path';
 import fs from 'fs';
 
-type webview_t = Pointer<unknown>;
-type pointer = Pointer<unknown>;
-type BindCallback = Pointer<(...args: ("string" | "pointer")[]) => void>
-type WebviewFFI = {
+/** Window size hints */
+export type SizeHint = typeof SizeHint[keyof typeof SizeHint];
+
+/** Window size hints */
+export const SizeHint = {
+  /** Width and height are default size */
+  NONE: 0,
+  /** Width and height are minimum bounds */
+  MIN: 1,
+  /** Width and height are maximum bounds */
+  MAX: 2,
+  /** Window size can not be changed by a user */
+  FIXED: 3,
+} as const;
+
+export type pointer = Pointer<unknown>;
+export type BindCallback = Pointer<(...args: ("string" | "pointer")[]) => void>
+export type webview_t = Pointer<unknown>;
+export type WebviewFFI = {
     webview_create    : ForeignFunction<webview_t, [number, pointer]>,
     webview_run       : ForeignFunction<void, [webview_t]>,
     webview_terminate : ForeignFunction<void, [webview_t]>,
@@ -21,10 +36,14 @@ type WebviewFFI = {
     webview_return    : ForeignFunction<void, [webview_t, string, number, string ]>,
     webview_unbind    : ForeignFunction<void, [webview_t, string]>,
     webview_set_size  : ForeignFunction<void, [webview_t, number,number,number]>,
+    webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>
 }
 
 /** 
- * get lib path from node_modules and extract webview2loader in windows
+ * Get lib's path from node_modules and extract webview2loader in windows
+ * 
+ * This fuction is used when the `libPath` is not set during calling the constructor of `Webview`
+ * 
  * @return the path to libwebview
 */
 export function getLibraryPath() :string {
@@ -48,8 +67,8 @@ export function getLibraryPath() :string {
 }
 
 export class Webview {
-    lib :WebviewFFI
-    webview :webview_t
+    private lib :WebviewFFI
+    private webview :webview_t
     
     WindowHint = {
         /** Width and height are default size */
@@ -68,7 +87,7 @@ export class Webview {
      * @debug enable DevTools and other debug features.
      * @param libPath the path to lib(dll/so/dylib). If not set, it will use built in libs.
      */  
-    constructor(debug=false, libPath = getLibraryPath()) {
+    constructor(debug :boolean = false, libPath :string = getLibraryPath()) {
         this.lib = new Library(libPath, { 
             'webview_create'   : [ 'pointer', [ 'int', 'pointer' ] ],
             'webview_run'      : [ 'void'   , [ 'pointer' ] ],
@@ -84,6 +103,7 @@ export class Webview {
             'webview_return'   : [ 'void'   , [ 'pointer', 'string', 'int', 'string' ] ],
             'webview_unbind'   : [ 'void'   , [ 'pointer', 'string' ] ],
             'webview_set_size' : [ 'void'   , [ 'pointer', 'int', 'int', 'int' ] ],
+            'webview_get_window':[ 'pointer'   , [ 'pointer' ] ],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0, (null as unknown as pointer));
         console.assert(this.webview != null);
@@ -128,7 +148,7 @@ export class Webview {
     *
     * @param hints can be one of `NONE(=0)`, `MIN(=1)`, `MAX(=2)` or `FIXED(=3)`
     */    
-    size(width: number, height: number, hints: number) {
+    size(width: number, height: number, hints: SizeHint | number = SizeHint.NONE) {
         this.lib.webview_set_size(this.webview,width,height,hints)
     }
 
@@ -146,7 +166,7 @@ export class Webview {
     /**
      * Evaluates arbitrary JS code.
      *
-     * Evaluation happens asynchronously, also the result of the expression is ignored. Use the `webview_bind` function if you want to receive notifications about the results of the evaluation.
+     * Evaluation happens asynchronously, also the result of the expression is ignored. Use the `bind` function if you want to receive notifications about the results of the evaluation.
      *
      * @param js the JS code
      */
@@ -155,14 +175,14 @@ export class Webview {
     }
 
     /**
-     * Binds a native Kotlin/Java callback so that it will appear under the given name as a global JS function.
+     * Binds a native NodeJS callback so that it will appear under the given name as a global browser's JS function.
      *
-     * Callback receives a request string. Request string is a JSON array of all the arguments passed to the JS function.
+     * Callback receives an Array from browser's JS. Request string is a JSON array of all the arguments passed to the JS function.
      *
-     * @param name the name of the global JS function
+     * @param name the name of the global browser's JS function
      * @param fn the callback function receives the request parameter in webview browser and return the response(=[isSuccess,result]), both in JSON string. If isSuccess=false, it wll reject the Promise.
      */
-    bindRaw(name :string, fn :(w: Webview,req :string)=>[boolean,string]) {
+    bindRaw(name :string, fn :(w: Webview, req :string)=>[boolean,string]) {
         let callback = Callback('void',['string','string','pointer'], (seq,req,_arg) => {
             const [isSuccess,result] = fn(this,req)
             this.lib.webview_return(this.webview,seq,isSuccess?0:1,result);
@@ -172,19 +192,19 @@ export class Webview {
     }
 
     /**
-    * Binds a Kotlin callback so that it will appear under the given name as a global JS function.
+    * Binds a NodeJS callback so that it will appear under the given name as a global JS function in browser JS .
     *
-    * @param name the name of the global browser JS function
+    * @param name the name of the global browser's JS function
     * @param fn the callback function which receives the parameter and return the result to Webview. Any exception happened in Node.js here will reject the `Promise` instead of crash the program.
     * 
     * ### Example
     * 
     * ```js
-    * bind("sumInNodeJS",(arg0,arg1) => {
+    * bind("sumInNodeJS",(webview, arg0,arg1) => {
     *   return arg0+arg1;
     * });
     * ```
-    * in Webview browser, you should call `await sumInNodeJS(1,2)` and get `3`
+    * in webview browser, you should call `await sumInNodeJS(1,2)` and get `3`
     */
     bind(name: string,fn: (w: Webview, ...args :any[]) => any) {
         this.bindRaw(name, (w: any,req: string)=>{
@@ -238,6 +258,28 @@ export class Webview {
      */
     terminate() {
         this.lib.webview_terminate(this.webview)
+    }
+
+    /** 
+     * **UNSAFE**: An unsafe pointer to the webview
+     * 
+     * This API comes from webview_deno.
+     * 
+     */
+    get unsafeHandle() {
+        return this.webview;
+    }
+
+    /** 
+     * **UNSAFE**: An unsafe pointer to the webviews platform specific native window handle.
+     *
+     * An unsafe pointer to the webviews platform specific native window handle.
+     * When using GTK backend the pointer is `GtkWindow` pointer, when using Cocoa
+     * backend the pointer is `NSWindow` pointer, when using Win32 backend the
+     * pointer is `HWND` pointer. This API comes from webview_deno.
+     */
+    get unsafeWindowHandle() {
+        return this.lib.webview_get_window(this.webview);
     }
 }
 

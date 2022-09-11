@@ -17,25 +17,25 @@ npm i webview-nodejs
 ```
 2. Import and use webview
 ```js
-import {Webview} from "webview-nodejs";
+const {Webview} = require('webview-nodejs');
 
 let w = new Webview(true);
 w.title("Hello");
-w.size(600,600,0);
+w.size(600,600);
 w.navigate("https://example.com");
 w.dispatch(()=>{
     w.title("World")
 });
-w.bind("increment", (w,i,inc)=>{
-    console.log(i);
-    return i+inc;
+w.bind("increment", (w,arg1,arg2)=>{
+    w.title(arg1);
+    return arg1+arg2;
 });
 w.show();
 ```
 
 ## Help
 
-- API Docs: [webview.d.ts](webview.d.ts)
+- [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
 
 ## Supported Platforms
 
@@ -50,13 +50,13 @@ All suggestions, pull requests, issues and other contributions are welcome and a
 
 ## Credits
 
-| Project                                                                      | License                                                                                          |
-|------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                                    |
-| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)                        |
+| Project | License |
+|---|---|
+| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                |
+| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)           |
+| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)    |
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [Microsoft WebView2 License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
 
-libs are from [webview_deno](https://github.com/webview/webview_deno)
 
 # License
 
