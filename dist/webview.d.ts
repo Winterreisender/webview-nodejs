@@ -13,10 +13,9 @@ export declare const SizeHint: {
     /** Window size can not be changed by a user */
     readonly FIXED: 3;
 };
-export declare type pointer = Pointer<unknown>;
 export declare type webview_t = Pointer<unknown>;
 export declare type WebviewFFI = {
-    webview_create: ForeignFunction<webview_t, [number, pointer]>;
+    webview_create: ForeignFunction<webview_t, [number, Pointer<unknown>]>;
     webview_run: ForeignFunction<void, [webview_t]>;
     webview_terminate: ForeignFunction<void, [webview_t]>;
     webview_destroy: ForeignFunction<void, [webview_t]>;
@@ -25,8 +24,8 @@ export declare type WebviewFFI = {
     webview_navigate: ForeignFunction<void, [webview_t, string]>;
     webview_init: ForeignFunction<void, [webview_t, string]>;
     webview_eval: ForeignFunction<void, [webview_t, string]>;
-    webview_dispatch: ForeignFunction<void, [webview_t, pointer]>;
-    webview_bind: ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, pointer]>;
+    webview_dispatch: ForeignFunction<void, [webview_t, Pointer<unknown>]>;
+    webview_bind: ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, Pointer<unknown>]>;
     webview_return: ForeignFunction<void, [webview_t, string, number, string]>;
     webview_unbind: ForeignFunction<void, [webview_t, string]>;
     webview_set_size: ForeignFunction<void, [webview_t, number, number, number]>;
@@ -73,7 +72,7 @@ export declare class Webview {
      *
      * URL may be a data URI, i.e. "data:text/text,...". It is often ok not to url-encode it properly, webview will re-encode it for you. Same as [navigate]
      *
-     * @param v the URL or URI
+     * @param url the URL or URI
      * */
     navigate(url: string): void;
     /**
@@ -99,7 +98,7 @@ export declare class Webview {
     */
     init(js: string): void;
     /**
-     * Evaluates arbitrary JS code.
+     * Evaluates arbitrary JS code in browser.
      *
      * Evaluation happens asynchronously, also the result of the expression is ignored. Use the `bind` function if you want to receive notifications about the results of the evaluation.
      *
@@ -114,7 +113,7 @@ export declare class Webview {
      * @param name the name of the global browser's JS function
      * @param fn the callback function receives the request parameter in webview browser and return the response(=[isSuccess,result]), both in JSON string. If isSuccess=false, it wll reject the Promise.
      */
-    bindRaw(name: string, fn: (w: Webview, req: string) => [boolean, string]): void;
+    bindRaw(name: string, fn: (w: Webview, req: string) => [number, string]): void;
     /**
     * Binds a NodeJS callback so that it will appear under the given name as a global JS function in browser JS .
     *
@@ -154,7 +153,7 @@ export declare class Webview {
     /**
      * Stops the main loop.
      *
-     * It is safe to call this function from another other background thread.
+     * It is safe to call this function from other background thread.
      */
     terminate(): void;
     /**

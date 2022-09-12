@@ -6,7 +6,11 @@ function onButtonPressed(webview, arg) {
         webview.title(arg)
         return true;
     } else {
-        throw Error("too long");
+        webview.eval(`
+            document.addEventListener('myevent',()=>{alert('too long')},false);
+            document.dispatchEvent(new Event('myevent'));
+        `);
+        throw "too long";
     }
 
 }

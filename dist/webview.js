@@ -42,7 +42,7 @@ function getLibraryPath() {
         return path_1.default.join(dir, 'libs', platform, arch, libName);
     }
     else {
-        throw new ReferenceError("Unsupported pattform: " + platform + arch);
+        throw new Error("Unsupported pattform: " + platform + arch);
     }
 }
 exports.getLibraryPath = getLibraryPath;
@@ -82,7 +82,9 @@ class Webview {
             'webview_get_window': ['pointer', ['pointer']],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0, null);
-        console.assert(this.webview != null);
+        if (!this.webview) {
+            throw new Error("Failed to create webview");
+        }
     }
     /**
      * Updates the title of the native window.
@@ -99,7 +101,7 @@ class Webview {
      *
      * URL may be a data URI, i.e. "data:text/text,...". It is often ok not to url-encode it properly, webview will re-encode it for you. Same as [navigate]
      *
-     * @param v the URL or URI
+     * @param url the URL or URI
      * */
     navigate(url) {
         this.lib.webview_navigate(this.webview, url);
@@ -133,7 +135,7 @@ class Webview {
         this.lib.webview_init(this.webview, js);
     }
     /**
-     * Evaluates arbitrary JS code.
+     * Evaluates arbitrary JS code in browser.
      *
      * Evaluation happens asynchronously, also the result of the expression is ignored. Use the `bind` function if you want to receive notifications about the results of the evaluation.
      *
@@ -152,8 +154,8 @@ class Webview {
      */
     bindRaw(name, fn) {
         let callback = (0, ffi_napi_1.Callback)('void', ['string', 'string', 'pointer'], (seq, req, _arg) => {
-            const [isSuccess, result] = fn(this, req);
-            this.lib.webview_return(this.webview, seq, isSuccess ? 0 : 1, result);
+            const [isError, result] = fn(this, req);
+            this.lib.webview_return(this.webview, seq, isError, result);
         });
         this.lib.webview_bind(this.webview, name, callback, null);
         process.on('exit', function () { callback; });
@@ -177,10 +179,10 @@ class Webview {
         this.bindRaw(name, (w, req) => {
             let args = JSON.parse(req);
             try {
-                return [true, JSON.stringify(fn(w, ...args))];
+                return [0, JSON.stringify(fn(w, ...args))];
             }
             catch (error) {
-                return [false, JSON.stringify(error)];
+                return [1, JSON.stringify(error)];
             }
         });
     }
@@ -218,7 +220,7 @@ class Webview {
     /**
      * Stops the main loop.
      *
-     * It is safe to call this function from another other background thread.
+     * It is safe to call this function from other background thread.
      */
     terminate() {
         this.lib.webview_terminate(this.webview);

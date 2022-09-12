@@ -18,10 +18,9 @@ export const SizeHint = {
   FIXED: 3,
 } as const;
 
-export type pointer = Pointer<unknown>;
 export type webview_t = Pointer<unknown>;
 export type WebviewFFI = {
-    webview_create    : ForeignFunction<webview_t, [number, pointer]>,
+    webview_create    : ForeignFunction<webview_t, [number, Pointer<unknown>]>,
     webview_run       : ForeignFunction<void, [webview_t]>,
     webview_terminate : ForeignFunction<void, [webview_t]>,
     webview_destroy   : ForeignFunction<void, [webview_t]>,
@@ -30,8 +29,8 @@ export type WebviewFFI = {
     webview_navigate  : ForeignFunction<void, [webview_t, string]>,
     webview_init      : ForeignFunction<void, [webview_t, string]>,
     webview_eval      : ForeignFunction<void, [webview_t, string]>,
-    webview_dispatch  : ForeignFunction<void, [webview_t, pointer]>,
-    webview_bind      : ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, pointer ]>,
+    webview_dispatch  : ForeignFunction<void, [webview_t, Pointer<unknown>]>,
+    webview_bind      : ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, Pointer<unknown> ]>,
     webview_return    : ForeignFunction<void, [webview_t, string, number, string ]>,
     webview_unbind    : ForeignFunction<void, [webview_t, string]>,
     webview_set_size  : ForeignFunction<void, [webview_t, number,number,number]>,
@@ -61,7 +60,7 @@ export function getLibraryPath() :string {
     if(['linux','win32','darwin'].includes(platform) && arch == 'x64') {
         return path.join(dir,'libs',platform,arch,libName)
     }else{
-        throw new ReferenceError("Unsupported pattform: " + platform + arch);
+        throw new Error("Unsupported pattform: " + platform + arch);
     }
 }
 
@@ -102,11 +101,12 @@ export class Webview {
             'webview_return'   : [ 'void'   , [ 'pointer', 'string', 'int', 'string' ] ],
             'webview_unbind'   : [ 'void'   , [ 'pointer', 'string' ] ],
             'webview_set_size' : [ 'void'   , [ 'pointer', 'int', 'int', 'int' ] ],
-            'webview_get_window':[ 'pointer'   , [ 'pointer' ] ],
+            'webview_get_window':[ 'pointer', [ 'pointer' ] ],
         });
-        this.webview = this.lib.webview_create(debug ? 1 : 0, (null as unknown as pointer));
-        console.assert(this.webview != null);
-
+        this.webview = this.lib.webview_create(debug ? 1 : 0, (null as unknown as Pointer<unknown>));
+        if(!this.webview) {
+            throw new Error("Failed to create webview");
+        }
     }
 
     /**
@@ -125,7 +125,7 @@ export class Webview {
      *
      * URL may be a data URI, i.e. "data:text/text,...". It is often ok not to url-encode it properly, webview will re-encode it for you. Same as [navigate]
      *
-     * @param v the URL or URI
+     * @param url the URL or URI
      * */
     navigate(url: string) {
         this.lib.webview_navigate(this.webview,url)
@@ -163,7 +163,7 @@ export class Webview {
     }
 
     /**
-     * Evaluates arbitrary JS code.
+     * Evaluates arbitrary JS code in browser.
      *
      * Evaluation happens asynchronously, also the result of the expression is ignored. Use the `bind` function if you want to receive notifications about the results of the evaluation.
      *
@@ -181,12 +181,12 @@ export class Webview {
      * @param name the name of the global browser's JS function
      * @param fn the callback function receives the request parameter in webview browser and return the response(=[isSuccess,result]), both in JSON string. If isSuccess=false, it wll reject the Promise.
      */
-    bindRaw(name :string, fn :(w: Webview, req :string)=>[boolean,string]) {
+    bindRaw(name :string, fn :(w: Webview, req :string)=>[number,string]) {
         let callback = Callback('void',['string','string','pointer'], (seq,req,_arg) => {
-            const [isSuccess,result] = fn(this,req)
-            this.lib.webview_return(this.webview,seq,isSuccess?0:1,result);
+            const [isError,result] = fn(this,req)
+            this.lib.webview_return(this.webview,seq,isError,result);
         });
-        this.lib.webview_bind(this.webview, name, callback, null as unknown as pointer );
+        this.lib.webview_bind(this.webview, name, callback, null as unknown as Pointer<unknown>);
         process.on('exit', function() { callback; });
     }
 
@@ -209,11 +209,11 @@ export class Webview {
         this.bindRaw(name, (w: any,req: string)=>{
             let args :any[] = JSON.parse(req);
             try {
-                return [true,  JSON.stringify(fn(w,...args))];
+                return [0,  JSON.stringify(fn(w,...args))];
             } catch(error) {
-                return [false, JSON.stringify(error)]
+                return [1, JSON.stringify(error)]
             }
-        })
+        });
     }
 
     /**
@@ -253,7 +253,7 @@ export class Webview {
     /**
      * Stops the main loop.
      *
-     * It is safe to call this function from another other background thread.
+     * It is safe to call this function from other background thread.
      */
     terminate() {
         this.lib.webview_terminate(this.webview)
