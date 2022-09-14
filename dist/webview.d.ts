@@ -151,6 +151,18 @@ export declare class Webview {
      */
     show(): void;
     /**
+     * Runs the main loop until it's terminated. **After this function exits - you must destroy the webview**.
+     *
+     * This will block the thread.
+     */
+    start(): void;
+    /**
+     * Destroy the webview and close the native window.
+     *
+     * You must destroy the webview after [run]
+     */
+    destroy(): void;
+    /**
      * Stops the main loop.
      *
      * It is safe to call this function from other background thread.

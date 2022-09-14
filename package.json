@@ -1,11 +1,16 @@
 {
   "name": "webview-nodejs",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "homepage": "https://github.com/Winterreisender/webview-nodejs",
-  "description": "An experimental nodejs binding to webview",
+  "description": "A Node.js binding to webview",
   "license": "Apache-2.0",
   "main": "dist/webview.js",
   "types": "dist/webview.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Winterreisender/webview-nodejs.git"
@@ -19,7 +24,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc",
+    "prepublish": "tsc && npm run doc",
     "test": "jest -t set_title",
     "doc": "typedoc --out docs/tsdoc/ src/webview.ts"
   },
