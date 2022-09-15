@@ -1,18 +1,16 @@
 import { ForeignFunction } from 'ffi-napi';
 import { Pointer } from 'ref-napi';
 /** Window size hints */
-export declare type SizeHint = typeof SizeHint[keyof typeof SizeHint];
-/** Window size hints */
-export declare const SizeHint: {
+export declare enum SizeHint {
     /** Width and height are default size */
-    readonly NONE: 0;
+    None = 0,
     /** Width and height are minimum bounds */
-    readonly MIN: 1;
+    Min = 1,
     /** Width and height are maximum bounds */
-    readonly MAX: 2;
+    Max = 2,
     /** Window size can not be changed by a user */
-    readonly FIXED: 3;
-};
+    Fixed = 3
+}
 export declare type webview_t = Pointer<unknown>;
 export declare type WebviewFFI = {
     webview_create: ForeignFunction<webview_t, [number, Pointer<unknown>]>;
@@ -42,16 +40,6 @@ export declare function getLibraryPath(): string;
 export declare class Webview {
     private lib;
     private webview;
-    WindowHint: {
-        /** Width and height are default size */
-        readonly NONE: 0;
-        /** Width and height are minimum bounds */
-        readonly MIN: 1;
-        /** Width and height are maximum bounds */
-        readonly MAX: 2;
-        /** Window size can not be changed by a user */
-        readonly FIXED: 3;
-    };
     /**
      * Create a webview.
      *

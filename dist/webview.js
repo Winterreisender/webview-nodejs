@@ -8,16 +8,17 @@ const ffi_napi_1 = require("ffi-napi");
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 /** Window size hints */
-exports.SizeHint = {
+var SizeHint;
+(function (SizeHint) {
     /** Width and height are default size */
-    NONE: 0,
+    SizeHint[SizeHint["None"] = 0] = "None";
     /** Width and height are minimum bounds */
-    MIN: 1,
+    SizeHint[SizeHint["Min"] = 1] = "Min";
     /** Width and height are maximum bounds */
-    MAX: 2,
+    SizeHint[SizeHint["Max"] = 2] = "Max";
     /** Window size can not be changed by a user */
-    FIXED: 3,
-};
+    SizeHint[SizeHint["Fixed"] = 3] = "Fixed";
+})(SizeHint = exports.SizeHint || (exports.SizeHint = {}));
 /**
  * Get lib's path from node_modules and extract webview2loader in windows
  *
@@ -54,16 +55,6 @@ class Webview {
      * @param libPath the path to lib(dll/so/dylib). If not set, it will use built in libs.
      */
     constructor(debug = false, libPath = getLibraryPath()) {
-        this.WindowHint = {
-            /** Width and height are default size */
-            NONE: 0,
-            /** Width and height are minimum bounds */
-            MIN: 1,
-            /** Width and height are maximum bounds */
-            MAX: 2,
-            /** Window size can not be changed by a user */
-            FIXED: 3,
-        };
         this.lib = new ffi_napi_1.Library(libPath, {
             'webview_create': ['pointer', ['int', 'pointer']],
             'webview_run': ['void', ['pointer']],
@@ -121,7 +112,7 @@ class Webview {
     *
     * @param hints can be one of `NONE(=0)`, `MIN(=1)`, `MAX(=2)` or `FIXED(=3)`
     */
-    size(width, height, hints = exports.SizeHint.NONE) {
+    size(width, height, hints = SizeHint.None) {
         this.lib.webview_set_size(this.webview, width, height, hints);
     }
     /**

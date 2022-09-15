@@ -40,10 +40,14 @@ w.show();
 
 ## Supported Platforms
 
+Build-in support:
+
 - win32 x64
 - linux x64
 - osx x64
 - osx aarch64
+
+By loading lib manully, other architectures could be supported. osx is not tested.
 
 ## Contribution
 

@@ -18,7 +18,7 @@ function onButtonPressed(webview, arg) {
 function main() {
     let w = new Webview(true);
     w.title("Hello");
-    w.size(600,600);
+    w.size(600,600,3);
     w.html(`
         <html><body>
         <button onclick="set_title(prompt('input title'));">

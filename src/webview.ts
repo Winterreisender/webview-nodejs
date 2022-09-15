@@ -4,19 +4,16 @@ import path from 'path';
 import fs from 'fs';
 
 /** Window size hints */
-export type SizeHint = typeof SizeHint[keyof typeof SizeHint];
-
-/** Window size hints */
-export const SizeHint = {
-  /** Width and height are default size */
-  NONE: 0,
-  /** Width and height are minimum bounds */
-  MIN: 1,
-  /** Width and height are maximum bounds */
-  MAX: 2,
-  /** Window size can not be changed by a user */
-  FIXED: 3,
-} as const;
+export enum SizeHint {
+    /** Width and height are default size */
+    None = 0,
+    /** Width and height are minimum bounds */
+    Min  = 1,
+    /** Width and height are maximum bounds */
+    Max  = 2,
+    /** Window size can not be changed by a user */
+    Fixed= 3
+}
 
 export type webview_t = Pointer<unknown>;
 export type WebviewFFI = {
@@ -68,17 +65,6 @@ export class Webview {
     private lib :WebviewFFI
     private webview :webview_t
     
-    WindowHint = {
-        /** Width and height are default size */
-        NONE: 0,
-        /** Width and height are minimum bounds */
-        MIN: 1,
-        /** Width and height are maximum bounds */
-        MAX: 2,
-        /** Window size can not be changed by a user */
-        FIXED: 3,
-    } as const;
-
     /**
      * Create a webview.
      *
@@ -147,7 +133,7 @@ export class Webview {
     *
     * @param hints can be one of `NONE(=0)`, `MIN(=1)`, `MAX(=2)` or `FIXED(=3)`
     */    
-    size(width: number, height: number, hints: SizeHint | number = SizeHint.NONE) {
+    size(width: number, height: number, hints: SizeHint | number = SizeHint.None) {
         this.lib.webview_set_size(this.webview,width,height,hints)
     }
 
