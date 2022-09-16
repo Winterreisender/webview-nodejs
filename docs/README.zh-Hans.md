@@ -5,18 +5,18 @@
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
 
-English | [中文(简体)](docs/README.zh-Hans.md) 
+[English](../README.md) | **中文(简体)**
 
-A Node.js binding to [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform desktop GUIs using [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), WebKit and [WebKitGTK](https://webkitgtk.org/).
+一个[webview](https://github.com/webview/webview)的Node.js绑定。 [webview](https://github.com/webview/webview) 是一个小巧、跨平台的网页视图库，可用以构建现代跨平台桌面软件。
 
 
-## Getting Started
+## 快速开始
 
-1. Install via npm
+1. 通过NPM来安装
 ```shell
 npm i webview-nodejs
 ```
-2. Import and use webview
+2. 导入并使用
 ```js
 const {Webview} = require('webview-nodejs');
 
@@ -34,29 +34,29 @@ w.bind("increment", (w,arg1,arg2)=>{
 w.show();
 ```
 
-## Help
+## 帮助
 
-- [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
-- [Examples](test/)
+- [文档](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
+- [例子](test/)
 
-## Supported Platforms
+## 支持的平台
 
-Build-in support:
+内置:
 
 - win32 x64
 - linux x64
 - osx x64
 - osx aarch64
 
-By loading lib manully, other architectures could be supported. osx is not tested.
+通过指定动态库位置`libPath`，也可支持其他平台。
 
-## Contribution
+## 参与进来
 
-All suggestions, pull requests, issues and other contributions are welcome and appreciated.
+我们欢迎并感谢任何建议,issue,pr和其他贡献。
 
-## Credits
+## 引用
 
-| Project | License |
+| 项目 | 许可 |
 |---|---|
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                |
 | [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)           |
@@ -64,7 +64,7 @@ All suggestions, pull requests, issues and other contributions are welcome and a
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [Microsoft WebView2 License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
 
 
-# License
+# 版权与许可
 
 Copyright 2022 Winterreisender.
 
@@ -72,7 +72,7 @@ Licensed under the Apache License, Version 2.0 (the "License"); you may not use 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
 See the License for the specific language governing permissions and limitations under the License.
 
-SPDX short identifier: **Apache-2.0**
+SPDX许可证标识: **Apache-2.0**
 
 <img src="https://opensource.org/sites/default/files/public/OSIApproved.svg" width="100" />
 
