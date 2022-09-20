@@ -1,4 +1,4 @@
-import {Webview} from '../dist/webview';
+import {Webview} from 'webview-nodejs';
 import {test} from '@jest/globals'
 
 function onButtonPressed(webview, arg) {

@@ -103,7 +103,7 @@ typings/
 .tern-port
 
 # dll
-./WebView2Loader.dll
+WebView2Loader.dll
 .dll
 .so
 .dylib

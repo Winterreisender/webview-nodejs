@@ -45,8 +45,9 @@ export declare class Webview {
      *
      * @debug enable DevTools and other debug features.
      * @param libPath the path to lib(dll/so/dylib). If not set, it will use built in libs.
+     * @param target the destination window handle. set it to null if you want to create a new window
      */
-    constructor(debug?: boolean, libPath?: string);
+    constructor(debug?: boolean, libPath?: string, target?: Pointer<unknown>);
     /**
      * Updates the title of the native window.
      *

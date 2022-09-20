@@ -1,4 +1,4 @@
-import {Webview} from '../dist/webview';
+const {Webview} = require('webview-nodejs');
 import {test} from '@jest/globals'
 
 function main() {

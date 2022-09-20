@@ -53,8 +53,9 @@ class Webview {
      *
      * @debug enable DevTools and other debug features.
      * @param libPath the path to lib(dll/so/dylib). If not set, it will use built in libs.
+     * @param target the destination window handle. set it to null if you want to create a new window
      */
-    constructor(debug = false, libPath = getLibraryPath()) {
+    constructor(debug = false, libPath = getLibraryPath(), target = null) {
         this.lib = new ffi_napi_1.Library(libPath, {
             'webview_create': ['pointer', ['int', 'pointer']],
             'webview_run': ['void', ['pointer']],
@@ -72,7 +73,7 @@ class Webview {
             'webview_set_size': ['void', ['pointer', 'int', 'int', 'int']],
             'webview_get_window': ['pointer', ['pointer']],
         });
-        this.webview = this.lib.webview_create(debug ? 1 : 0, null);
+        this.webview = this.lib.webview_create(debug ? 1 : 0, target);
         if (!this.webview) {
             throw new Error("Failed to create webview");
         }

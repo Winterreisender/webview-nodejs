@@ -25,7 +25,7 @@
   "scripts": {
     "build": "tsc",
     "prepublish": "tsc && npm run doc",
-    "test": "jest -t set_title",
+    "test": "jest set_title",
     "doc": "typedoc --out docs/tsdoc/ src/webview.ts"
   },
   "dependencies": {

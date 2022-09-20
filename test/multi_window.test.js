@@ -1,10 +1,10 @@
-import {Webview} from '../dist/webview';
+import {SizeHint, Webview} from 'webview-nodejs';
 import {test} from '@jest/globals'
 
 function makeWebview() {
     let w = new Webview(true);
     w.title("Hello");
-    w.size(600,600,0);
+    w.size(600,600,SizeHint.None);
     w.navigate("https://example.com");
     w.dispatch((w)=>{
         w.title("World")
