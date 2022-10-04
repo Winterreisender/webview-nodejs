@@ -4,6 +4,7 @@
 ![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs?ref=badge_shield)
 
 English | [中文(简体)](docs/README.zh-Hans.md) 
 
@@ -76,3 +77,6 @@ SPDX short identifier: **Apache-2.0**
 
 <img src="https://opensource.org/sites/default/files/public/OSIApproved.svg" width="100" />
 
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs?ref=badge_large)
