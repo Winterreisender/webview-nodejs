@@ -196,8 +196,17 @@ export class Webview {
         this.bindRaw(name, (w: any,req: string)=>{
             let args :any[] = JSON.parse(req);
             try {
-                return [0,  JSON.stringify(fn(w,...args))];
-            } catch(error) {
+                const resultValue = fn(w, ...args) ?? null; // convert undefined to null
+                const result = JSON.stringify(resultValue);
+
+                if (result === undefined) {
+                    // need JSON.stringify to wrap string in quotes
+                    return [1, JSON.stringify(`JSON.stringify failed for return value ${resultValue}`)];
+                }
+
+                return [0, result];
+            }
+            catch (error) {
                 return [1, JSON.stringify(error)]
             }
         });
