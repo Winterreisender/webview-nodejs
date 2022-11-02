@@ -181,7 +181,9 @@ class Webview {
                 return [0, result];
             }
             catch (error) {
-                return [1, JSON.stringify(error)];
+                // JSON.stringify(error) returns "[object Object]", call String to get message
+                // need JSON.stringify to wrap string in quotes
+                return [1, JSON.stringify(String(error))];
             }
         });
     }
