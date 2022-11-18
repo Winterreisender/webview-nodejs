@@ -9,6 +9,7 @@
 
 一个[webview](https://github.com/webview/webview)的Node.js绑定。 [webview](https://github.com/webview/webview) 是一个小巧、跨平台的网页视图库，可用以构建现代跨平台桌面软件。
 
+![](screenshot/screenshot.webp)
 
 ## 快速开始
 

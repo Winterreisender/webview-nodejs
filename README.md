@@ -9,6 +9,7 @@ English | [中文(简体)](docs/README.zh-Hans.md)
 
 A Node.js binding to [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform desktop GUIs using [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), WebKit and [WebKitGTK](https://webkitgtk.org/).
 
+![](docs/screenshot/screenshot.webp)
 
 ## Getting Started
 
