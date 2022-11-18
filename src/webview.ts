@@ -244,8 +244,9 @@ export class Webview {
      * This will block the thread.
      */
     show() {
-        this.lib.webview_run(this.webview)
-        this.lib.webview_destroy(this.webview)
+        this.start()
+        this.terminate()
+        this.destroy()
     }
 
     /**
@@ -264,6 +265,7 @@ export class Webview {
      */
     destroy() {
         this.lib.webview_destroy(this.webview)
+        this.webview = null as unknown as webview_t;
     }
 
     /**
