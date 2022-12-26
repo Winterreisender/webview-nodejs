@@ -169,12 +169,21 @@ class Webview {
     */
     bind(name, fn) {
         this.bindRaw(name, (w, req) => {
+            var _a;
             let args = JSON.parse(req);
             try {
-                return [0, JSON.stringify(fn(w, ...args))];
+                const resultValue = (_a = fn(w, ...args)) !== null && _a !== void 0 ? _a : null; // convert undefined to null
+                const result = JSON.stringify(resultValue);
+                if (result === undefined) {
+                    // need JSON.stringify to wrap string in quotes
+                    return [1, JSON.stringify(`JSON.stringify failed for return value ${resultValue}`)];
+                }
+                return [0, result];
             }
             catch (error) {
-                return [1, JSON.stringify(error)];
+                // JSON.stringify(error) returns "[object Object]", call String to get message
+                // need JSON.stringify to wrap string in quotes
+                return [1, JSON.stringify(String(error))];
             }
         });
     }

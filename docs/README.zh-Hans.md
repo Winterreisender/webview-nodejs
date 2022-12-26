@@ -1,14 +1,15 @@
 # webview-nodejs
 
-[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs) ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest) ![npm](https://img.shields.io/npm/dt/webview-nodejs)
-![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
-![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
+[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs) ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest?label=体积) ![npm download](https://img.shields.io/npm/dt/webview-nodejs?label=下载次数)
+![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko?label=上次提交)
+![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639&label=许可)
 
 [English](../README.md) | **中文(简体)**
 
 一个[webview](https://github.com/webview/webview)的Node.js绑定。 [webview](https://github.com/webview/webview) 是一个小巧、跨平台的网页视图库，可用以构建现代跨平台桌面软件。
 
+![](screenshot/screenshot.webp)
 
 ## 快速开始
 
@@ -48,7 +49,7 @@ w.show();
 - osx x64
 - osx aarch64
 
-通过指定动态库位置`libPath`，也可支持其他平台。
+通过指定动态库位置`libPath`，也可支持其他平台。OSX未经测试。需Node.js 10+。
 
 ## 参与进来
 
@@ -61,18 +62,17 @@ w.show();
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                |
 | [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)           |
 | [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)    |
-| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [Microsoft WebView2 License](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
+| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-3-Clause](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
 
 
-# 版权与许可
+## 版权与许可
 
-Copyright 2022 Winterreisender.
+Copyright 2022 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0  
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
 See the License for the specific language governing permissions and limitations under the License.
 
-SPDX许可证标识: **Apache-2.0**
+SPDX标识: **Apache-2.0**
 
 <img src="https://opensource.org/sites/default/files/public/OSIApproved.svg" width="100" />
-
