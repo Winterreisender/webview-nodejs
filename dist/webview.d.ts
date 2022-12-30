@@ -11,8 +11,8 @@ export declare enum SizeHint {
     /** Window size can not be changed by a user */
     Fixed = 3
 }
-export declare type webview_t = Pointer<unknown>;
-export declare type WebviewFFI = {
+export type webview_t = Pointer<unknown>;
+export type WebviewFFI = {
     webview_create: ForeignFunction<webview_t, [number, Pointer<unknown>]>;
     webview_run: ForeignFunction<void, [webview_t]>;
     webview_terminate: ForeignFunction<void, [webview_t]>;

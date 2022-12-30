@@ -1,3 +1,7 @@
+/**
+ * This example is provided by [Dirk Krause](https://github.com/dirkk0) with modifications.
+ */
+
 const { Webview } = require("webview-nodejs");
 
 function main() {

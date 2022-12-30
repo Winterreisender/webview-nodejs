@@ -1,9 +1,9 @@
 # webview-nodejs
 
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
-[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
+[![npm version](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
 ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest)
-![npm](https://img.shields.io/npm/dt/webview-nodejs)
+![npm download](https://img.shields.io/npm/dt/webview-nodejs)
 ![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs?ref=badge_shield)

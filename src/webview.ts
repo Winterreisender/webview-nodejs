@@ -57,7 +57,7 @@ export function getLibraryPath() :string {
     if(['linux','win32','darwin'].includes(platform) && arch == 'x64') {
         return path.join(dir,'libs',platform,arch,libName)
     }else{
-        throw new Error("Unsupported pattform: " + platform + arch);
+        throw new Error(`Unsupported pattform: ${platform} ${arch}`);
     }
 }
 

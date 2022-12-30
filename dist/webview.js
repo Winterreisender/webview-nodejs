@@ -43,7 +43,7 @@ function getLibraryPath() {
         return path_1.default.join(dir, 'libs', platform, arch, libName);
     }
     else {
-        throw new Error("Unsupported pattform: " + platform + arch);
+        throw new Error(`Unsupported pattform: ${platform} ${arch}`);
     }
 }
 exports.getLibraryPath = getLibraryPath;
@@ -215,8 +215,9 @@ class Webview {
      * This will block the thread.
      */
     show() {
-        this.lib.webview_run(this.webview);
-        this.lib.webview_destroy(this.webview);
+        this.start();
+        this.terminate();
+        this.destroy();
     }
     /**
      * Runs the main loop until it's terminated. **After this function exits - you must destroy the webview**.
@@ -233,6 +234,7 @@ class Webview {
      */
     destroy() {
         this.lib.webview_destroy(this.webview);
+        this.webview = null;
     }
     /**
      * Stops the main loop.

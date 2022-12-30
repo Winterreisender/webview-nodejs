@@ -24,12 +24,13 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc && npm run doc",
+    "doc": "typedoc --out docs/tsdoc/ src/webview.ts",
     "test": "jest",
-    "doc": "typedoc --out docs/tsdoc/ src/webview.ts"
+    "prepublish": "npm run build && npm run doc",
+    "pretest": "npm run build"
   },
   "dependencies": {
-    "@types/ffi-napi": "^4.0.5",
+    "@types/ffi-napi": "^4.0.7",
     "ffi-napi": "^4.0.3"
   },
   "devDependencies": {
