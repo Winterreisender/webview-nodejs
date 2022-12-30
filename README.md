@@ -12,7 +12,7 @@ English | [中文(简体)](docs/README.zh-Hans.md)
 
 A Node.js binding to [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform desktop GUIs using [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), WebKit and [WebKitGTK](https://webkitgtk.org/).
 
-![](docs/screenshot/screenshot.webp)
+![screenshot](docs/screenshot/screenshot.webp)
 
 ## Getting Started
 
@@ -27,24 +27,23 @@ npm i webview-nodejs
 ```js
 const { Webview } = require('webview-nodejs');
 
-let w = new Webview();
-w.title("Hello");
-w.size(600,600);
-w.navigate("https://example.com");
-w.dispatch(()=>{
-    w.title("World")
-});
-w.bind("increment", (w,arg1,arg2)=>{
-    w.title(arg1);
-    return arg1+arg2;
-});
-w.show();
+function main() {
+    let w = new Webview();
+    w.title("Hello World");
+    w.size(800,600);
+    w.navigate("https://example.com");
+    w.show();
+}
 ```
+
+For more examples like interacting between Node.js and webview and more detailed instructions see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
 
 ## Help
 
+- [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial)
 - [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
 - [Examples](test/)
+- [webview.dev](https://webview.dev/)
 
 ## Supported Platforms
 
@@ -55,7 +54,9 @@ Build-in support:
 - osx x64
 - osx aarch64
 
-By loading lib manully, other architectures could be supported. osx is not tested. Node.js 10+ is required.
+By loading lib manully, other architectures could be supported. osx is not tested. 
+
+You need [Webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) for Windows. For more information, see [Prerequisites](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial#prerequisites).
 
 ## Contribution
 
