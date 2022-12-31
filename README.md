@@ -27,13 +27,11 @@ npm i webview-nodejs
 ```js
 const { Webview } = require('webview-nodejs');
 
-function main() {
-    let w = new Webview();
-    w.title("Hello World");
-    w.size(800,600);
-    w.navigate("https://example.com");
-    w.show();
-}
+let w = new Webview();
+w.title("Hello World");
+w.size(800,600);
+w.navigate("https://example.com");
+w.show();
 ```
 
 For more examples like interacting between Node.js and webview and more detailed instructions see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
