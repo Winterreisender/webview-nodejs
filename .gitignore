@@ -107,3 +107,7 @@ WebView2Loader.dll
 .dll
 .so
 .dylib
+
+# Auto-generated Files
+dist/*.d.ts
+dist/*.js

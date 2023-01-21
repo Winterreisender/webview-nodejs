@@ -15,20 +15,21 @@
 ## 快速开始
 
 1. 通过NPM来安装
+
 ```shell
 npm i webview-nodejs
 ```
-2. 导入并使用
-```js
-const { Webview } = require('webview-nodejs');
 
-function main() {
-    let w = new Webview();
-    w.title("Hello World");
-    w.size(800,600);
-    w.navigate("https://example.com");
-    w.show();
-}
+2. 导入并使用
+
+```js
+const { Webview } = require('webview-nodejs'); 
+
+let w = new Webview();
+w.title("Hello World");
+w.size(800,600);
+w.navigate("https://example.com");
+w.show();
 ```
 
 教程有更详细的步骤和例子(例如在Node.js和webview间交互)。
@@ -49,7 +50,7 @@ function main() {
 - osx x64
 - osx aarch64
 
-通过指定动态库位置`libPath`，也可支持其他平台。OSX未经测试。
+通过指定动态库位置 `libPath`，也可支持其他平台。OSX未经测试。
 
 在Windows上需要安装[Webview2](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2/), 详见[前提条件](https://github.com/Winterreisender/webview-nodejs/wiki/教程#前提条件)
 
@@ -59,20 +60,19 @@ function main() {
 
 ## 引用
 
-| 项目 | 许可 |
-|---|---|
-| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                |
-| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)           |
-| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)    |
-| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-3-Clause](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License)     |
-
+| 项目                                                                      | 许可                                                                                   |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                             |
+| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                        |
+| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)                 |
+| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-3-Clause](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
 
 ## 版权与许可
 
 Copyright 2022 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0  
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 
 SPDX标识: **Apache-2.0**

@@ -10,7 +10,7 @@
 
 English | [中文(简体)](docs/README.zh-Hans.md)
 
-A Node.js binding to [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform desktop GUIs using [WebView2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), WebKit and [WebKitGTK](https://webkitgtk.org/).
+A Node.js binding and wrapper for [webview](https://github.com/webview/webview), a tiny cross-platform webview library to build modern cross-platform desktop GUIs using WebKit (Gtk/Cocoa) and Edge (Windows).
 
 ![screenshot](docs/screenshot/screenshot.webp)
 
@@ -52,7 +52,7 @@ Build-in support:
 - osx x64
 - osx aarch64
 
-By loading lib manully, other architectures could be supported. osx is not tested. 
+By loading lib manully, other architectures could be supported. osx is not tested.
 
 You need [Webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) for Windows. For more information, see [Prerequisites](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial#prerequisites).
 

@@ -30,7 +30,7 @@ export type WebviewFFI = {
     webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>;
 };
 /**
- * Get lib's path from node_modules and extract webview2loader in windows
+ * Get lib's path from node_modules
  *
  * This fuction is used when the `libPath` is not set during calling the constructor of `Webview`
  *

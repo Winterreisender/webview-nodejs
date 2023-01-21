@@ -35,7 +35,7 @@ export type WebviewFFI = {
 }
 
 /** 
- * Get lib's path from node_modules and extract webview2loader in windows
+ * Get lib's path from node_modules
  * 
  * This fuction is used when the `libPath` is not set during calling the constructor of `Webview`
  * 
@@ -49,10 +49,10 @@ export function getLibraryPath() :string {
     if(platform == 'win32'){
         libName = libName.replace(/^(lib)/,'');
         // Copy dlls
-        let dst = path.join('.','WebView2Loader.dll');
-        if(!fs.existsSync(dst)) {
-            fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
-        }
+        //let dst = path.join('.','WebView2Loader.dll');
+        //if(!fs.existsSync(dst)) {
+        //    fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
+        //}
     }
     if(['linux','win32','darwin'].includes(platform) && arch == 'x64') {
         return path.join(dir,'libs',platform,arch,libName)

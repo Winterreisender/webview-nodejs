@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Webview = exports.getLibraryPath = exports.SizeHint = void 0;
 const ffi_napi_1 = require("ffi-napi");
 const path_1 = __importDefault(require("path"));
-const fs_1 = __importDefault(require("fs"));
 /** Window size hints */
 var SizeHint;
 (function (SizeHint) {
@@ -20,7 +19,7 @@ var SizeHint;
     SizeHint[SizeHint["Fixed"] = 3] = "Fixed";
 })(SizeHint = exports.SizeHint || (exports.SizeHint = {}));
 /**
- * Get lib's path from node_modules and extract webview2loader in windows
+ * Get lib's path from node_modules
  *
  * This fuction is used when the `libPath` is not set during calling the constructor of `Webview`
  *
@@ -34,10 +33,10 @@ function getLibraryPath() {
     if (platform == 'win32') {
         libName = libName.replace(/^(lib)/, '');
         // Copy dlls
-        let dst = path_1.default.join('.', 'WebView2Loader.dll');
-        if (!fs_1.default.existsSync(dst)) {
-            fs_1.default.copyFileSync(path_1.default.join(dir, 'libs', platform, arch, 'WebView2Loader.dll'), dst);
-        }
+        //let dst = path.join('.','WebView2Loader.dll');
+        //if(!fs.existsSync(dst)) {
+        //    fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
+        //}
     }
     if (['linux', 'win32', 'darwin'].includes(platform) && arch == 'x64') {
         return path_1.default.join(dir, 'libs', platform, arch, libName);
