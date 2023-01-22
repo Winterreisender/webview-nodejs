@@ -2,12 +2,12 @@ const {Webview} = require('webview-nodejs');
 import {test} from '@jest/globals'
 
 function main() {
-    let w = new Webview();
+    let w = new Webview(true);
     w.title("Hello");
     w.size(600,600);
     w.html(`
         <html><body>
-        <button onclick="addInNode(prompt(), prompt());">
+        <button onclick="addInNode(parseInt(prompt()), parseInt(prompt()));">
             Test
         </button>
         </body></html>

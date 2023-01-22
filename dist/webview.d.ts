@@ -40,6 +40,7 @@ export declare function getLibraryPath(): string;
 export declare class Webview {
     private lib;
     private webview;
+    private isDebug;
     /**
      * Create a webview.
      *

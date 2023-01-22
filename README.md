@@ -2,6 +2,7 @@
 
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
 [![npm version](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
+![npm (tag)](https://img.shields.io/npm/v/webview-nodejs/next)
 ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest)
 ![npm download](https://img.shields.io/npm/dt/webview-nodejs)
 ![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)

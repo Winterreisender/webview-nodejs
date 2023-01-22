@@ -73,6 +73,7 @@ class Webview {
             'webview_get_window': ['pointer', ['pointer']],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0, target);
+        this.isDebug = debug;
         if (!this.webview) {
             throw new Error("Failed to create webview");
         }
@@ -149,7 +150,7 @@ class Webview {
             this.lib.webview_return(this.webview, seq, isError, result);
         });
         this.lib.webview_bind(this.webview, name, callback, null);
-        process.on('exit', function () { callback; });
+        process.on('exit', function () { callback; }); // Avoid GC
     }
     /**
     * Binds a NodeJS callback so that it will appear under the given name as a global JS function in browser JS .
@@ -180,8 +181,7 @@ class Webview {
                 return [0, result];
             }
             catch (error) {
-                // JSON.stringify(error) returns "[object Object]", call String to get message
-                // need JSON.stringify to wrap string in quotes
+                // JSON.stringify(error) returns "[object Object]", call String to get message, need JSON.stringify to wrap string in quotes
                 return [1, JSON.stringify(String(error))];
             }
         });
