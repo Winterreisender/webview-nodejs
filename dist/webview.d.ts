@@ -28,6 +28,7 @@ export type WebviewFFI = {
     webview_unbind: ForeignFunction<void, [webview_t, string]>;
     webview_set_size: ForeignFunction<void, [webview_t, number, number, number]>;
     webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>;
+    webview_version: ForeignFunction<Pointer<unknown>, []>;
 };
 /**
  * Get lib's path from node_modules
@@ -96,7 +97,7 @@ export declare class Webview {
      */
     eval(js: string): void;
     /**
-     * Binds a native NodeJS callback so that it will appear under the given name as a global browser's JS function.
+     * Binds a native NodeJS callback so that it will appear under the given name as a global webview's JS function.
      *
      * Callback receives an Array from browser's JS. Request string is a JSON array of all the arguments passed to the JS function.
      *
@@ -105,7 +106,7 @@ export declare class Webview {
      */
     bindRaw(name: string, fn: (w: Webview, req: string) => [number, string]): void;
     /**
-    * Binds a NodeJS callback so that it will appear under the given name as a global JS function in browser JS .
+    * Binds a Node.js callback so that it will appear under the given name as a global JS function in webview .
     *
     * @param name the name of the global browser's JS function
     * @param fn the callback function which receives the parameter and return the result to Webview. Any exception happened in Node.js here will reject the `Promise` instead of crash the program.
@@ -137,7 +138,7 @@ export declare class Webview {
     /**
      * Runs the main loop and destroy it when terminated.
      *
-     * This will block the thread.
+     * This will block the thread. Functions like `setInterval` won't work.
      */
     show(): void;
     /**
@@ -174,4 +175,5 @@ export declare class Webview {
      * pointer is `HWND` pointer. This API comes from webview_deno.
      */
     get unsafeWindowHandle(): Pointer<unknown>;
+    get version(): Pointer<unknown>;
 }

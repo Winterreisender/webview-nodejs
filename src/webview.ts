@@ -1,8 +1,6 @@
 import { Library, Callback, LIB_EXT, ForeignFunction } from 'ffi-napi';
 import {Pointer} from 'ref-napi';
 import path from 'path';
-import fs from 'fs';
-
 /** Window size hints */
 export enum SizeHint {
     /** Width and height are default size */
@@ -31,7 +29,8 @@ export type WebviewFFI = {
     webview_return    : ForeignFunction<void, [webview_t, string, number, string ]>,
     webview_unbind    : ForeignFunction<void, [webview_t, string]>,
     webview_set_size  : ForeignFunction<void, [webview_t, number,number,number]>,
-    webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>
+    webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>,
+    webview_version   : ForeignFunction<Pointer<unknown>, []>
 }
 
 /** 
@@ -90,6 +89,7 @@ export class Webview {
             'webview_unbind'   : [ 'void'   , [ 'pointer', 'string' ] ],
             'webview_set_size' : [ 'void'   , [ 'pointer', 'int', 'int', 'int' ] ],
             'webview_get_window':[ 'pointer', [ 'pointer' ] ],
+            'webview_version'  :[ 'pointer' , [] ],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0, target);
 
@@ -243,7 +243,7 @@ export class Webview {
     /**
      * Runs the main loop and destroy it when terminated.
      *
-     * This will block the thread.
+     * This will block the thread. Functions like `setInterval` won't work.
      */
     show() {
         this.start()
@@ -299,6 +299,10 @@ export class Webview {
      */
     get unsafeWindowHandle() {
         return this.lib.webview_get_window(this.webview);
+    }
+
+    get version() {
+        return this.lib.webview_version()
     }
 }
 

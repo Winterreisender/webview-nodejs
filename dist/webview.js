@@ -71,6 +71,7 @@ class Webview {
             'webview_unbind': ['void', ['pointer', 'string']],
             'webview_set_size': ['void', ['pointer', 'int', 'int', 'int']],
             'webview_get_window': ['pointer', ['pointer']],
+            'webview_version': ['pointer', []],
         });
         this.webview = this.lib.webview_create(debug ? 1 : 0, target);
         this.isDebug = debug;
@@ -137,7 +138,7 @@ class Webview {
         this.lib.webview_eval(this.webview, js);
     }
     /**
-     * Binds a native NodeJS callback so that it will appear under the given name as a global browser's JS function.
+     * Binds a native NodeJS callback so that it will appear under the given name as a global webview's JS function.
      *
      * Callback receives an Array from browser's JS. Request string is a JSON array of all the arguments passed to the JS function.
      *
@@ -153,7 +154,7 @@ class Webview {
         process.on('exit', function () { callback; }); // Avoid GC
     }
     /**
-    * Binds a NodeJS callback so that it will appear under the given name as a global JS function in browser JS .
+    * Binds a Node.js callback so that it will appear under the given name as a global JS function in webview .
     *
     * @param name the name of the global browser's JS function
     * @param fn the callback function which receives the parameter and return the result to Webview. Any exception happened in Node.js here will reject the `Promise` instead of crash the program.
@@ -211,7 +212,7 @@ class Webview {
     /**
      * Runs the main loop and destroy it when terminated.
      *
-     * This will block the thread.
+     * This will block the thread. Functions like `setInterval` won't work.
      */
     show() {
         this.start();
@@ -262,6 +263,9 @@ class Webview {
      */
     get unsafeWindowHandle() {
         return this.lib.webview_get_window(this.webview);
+    }
+    get version() {
+        return this.lib.webview_version();
     }
 }
 exports.Webview = Webview;
