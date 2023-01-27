@@ -43,6 +43,7 @@ For more examples like interacting between Node.js and webview and more detailed
 - [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
 - [Examples](test/)
 - [webview.dev](https://webview.dev/)
+- [Limitations and Workarounds](https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds)
 
 ## Supported Platforms
 
