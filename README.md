@@ -60,7 +60,7 @@ For more information, see [Prerequisites](https://github.com/Winterreisender/web
 
 ## Contribution
 
-All suggestions, pull requests, issues and other contributions are welcome and appreciated.
+All suggestions, pull requests, issues, discussions and other contributions are welcome and appreciated.
 
 ## Credits
 
