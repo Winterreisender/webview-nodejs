@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "doc": "typedoc --out docs/tsdoc/ src/webview.ts",
+    "doc": "typedoc --readme README.md --out docs/tsdoc/ src/webview.ts",
     "test": "jest",
     "prepublish": "npm run build && npm run doc",
     "pretest": "npm run build"

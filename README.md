@@ -40,8 +40,8 @@ For more examples like interacting between Node.js and webview and more detailed
 ## Help
 
 - [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial)
-- [Documentation](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
-- [Examples](test/)
+- [API Reference](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
+- [Examples](https://github.com/Winterreisender/webview-nodejs/tree/master/test/)
 - [webview.dev](https://webview.dev/)
 - [Limitations and Workarounds](https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds)
 
@@ -51,8 +51,7 @@ Build-in support:
 
 - win32 x64
 - linux x64
-- osx x64
-- osx aarch64
+- osx x64 and aarch64
 
 By loading lib manully, other architectures could be supported, you could find them [here](https://github.com/Winterreisender/webview-xmake/releases). Only windows-x64 and linux-x64 are tested.
 
@@ -73,12 +72,17 @@ All suggestions, pull requests, issues, discussions and other contributions are 
 
 # License
 
-Copyright 2022 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
+```text
+Copyright 2022-2023 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and limitations under the License.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
 
-SPDX short identifier: **Apache-2.0**
-
-<img src="https://opensource.org/sites/default/files/public/OSIApproved.svg" width="100" />
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
