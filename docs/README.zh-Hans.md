@@ -1,9 +1,9 @@
 # webview-nodejs
 
 ![npm type definitions](https://img.shields.io/npm/types/webview-nodejs?label=%20&logo=typescript&logoColor=white)
-[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs) 
+[![npm](https://img.shields.io/npm/v/webview-nodejs)](https://www.npmjs.com/package/webview-nodejs)
 ![npm (tag)](https://img.shields.io/npm/v/webview-nodejs/next)
-![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest?label=体积) 
+![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest?label=体积)
 ![npm download](https://img.shields.io/npm/dt/webview-nodejs?label=下载次数)
 ![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko?label=上次提交)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639&label=许可)
@@ -64,11 +64,11 @@ w.show();
 
 ## 引用
 
-| 项目                                                                      | 许可                                                                                   |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                             |
-| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                        |
-| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)                 |
+| 项目                                                                      | 许可                                                                                |
+| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                          |
+| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                     |
+| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)              |
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-style](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
 
 ## 版权与许可
@@ -76,7 +76,7 @@ w.show();
 # License
 
 ```text
-Copyright 2022-2023 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
+Copyright 2022-2023 Winterreisender and other contributors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

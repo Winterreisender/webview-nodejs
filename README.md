@@ -73,7 +73,7 @@ All suggestions, pull requests, issues, discussions and other contributions are 
 # License
 
 ```text
-Copyright 2022-2023 Winterreisender and [other contributors](https://github.com/Winterreisender/webview-nodejs/graphs/contributors).
+Copyright 2022-2023 Winterreisender and other contributors.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
