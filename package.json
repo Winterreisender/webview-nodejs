@@ -1,6 +1,6 @@
 {
   "name": "webview-nodejs",
-  "version": "0.2.0",
+  "version": "0.2.0-dev.1",
   "homepage": "https://github.com/Winterreisender/webview-nodejs",
   "description": "A Node.js binding to webview",
   "license": "Apache-2.0",
