@@ -22,5 +22,5 @@ function main() {
     w.show();
 }
 
-test('demo',main);
+test('basic_bind',main);
 

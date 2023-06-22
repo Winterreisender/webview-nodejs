@@ -1,6 +1,6 @@
 {
   "name": "webview-nodejs",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "homepage": "https://github.com/Winterreisender/webview-nodejs",
   "description": "A Node.js binding to webview",
   "license": "Apache-2.0",
@@ -30,8 +30,7 @@
     "pretest": "npm run build"
   },
   "dependencies": {
-    "@types/ffi-napi": "^4.0.7",
-    "ffi-napi": "^4.0.3"
+    "koffi": "^2.5.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
@@ -43,6 +42,6 @@
     "typescript": "^4.8.3"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12.22.0"
   }
 }

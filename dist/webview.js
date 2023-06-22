@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Webview = exports.getLibraryPath = exports.SizeHint = void 0;
-const ffi_napi_1 = require("ffi-napi");
 const path_1 = __importDefault(require("path"));
+const koffi = require('koffi');
 /** Window size hints */
 var SizeHint;
 (function (SizeHint) {
@@ -29,14 +29,9 @@ function getLibraryPath() {
     let dir = __dirname;
     let arch = process.arch;
     let platform = process.platform;
-    let libName = 'libwebview' + ffi_napi_1.LIB_EXT;
+    let libName = 'libwebview' + '.dll'; // TODO: LIB_EXT
     if (platform == 'win32') {
         libName = libName.replace(/^(lib)/, '');
-        // Copy dlls
-        //let dst = path.join('.','WebView2Loader.dll');
-        //if(!fs.existsSync(dst)) {
-        //    fs.copyFileSync(path.join(dir,'libs',platform,arch,'WebView2Loader.dll'),dst);
-        //}
     }
     if (['linux', 'win32', 'darwin'].includes(platform) && arch == 'x64') {
         return path_1.default.join(dir, 'libs', platform, arch, libName);
@@ -46,6 +41,8 @@ function getLibraryPath() {
     }
 }
 exports.getLibraryPath = getLibraryPath;
+const DispatchCallback = koffi.proto('void DispatchCallback(void* webview, void* args)'); //  If the C function calls the callback later, the behavior is undefined
+const BindCallback = koffi.proto('void BindCallback(char* seq, char* req, void* args)');
 class Webview {
     /**
      * Create a webview.
@@ -55,29 +52,36 @@ class Webview {
      * @param target the destination window handle. set it to null if you want to create a new window
      */
     constructor(debug = false, libPath = getLibraryPath(), target = null) {
-        this.lib = new ffi_napi_1.Library(libPath, {
-            'webview_create': ['pointer', ['int', 'pointer']],
-            'webview_run': ['void', ['pointer']],
-            'webview_terminate': ['void', ['pointer']],
-            'webview_destroy': ['void', ['pointer']],
-            'webview_set_title': ['void', ['pointer', 'string']],
-            'webview_set_html': ['void', ['pointer', 'string']],
-            'webview_navigate': ['void', ['pointer', 'string']],
-            'webview_init': ['void', ['pointer', 'string']],
-            'webview_eval': ['void', ['pointer', 'string']],
-            'webview_dispatch': ['void', ['pointer', 'pointer']],
-            'webview_bind': ['void', ['pointer', 'string', 'pointer', 'pointer']],
-            'webview_return': ['void', ['pointer', 'string', 'int', 'string']],
-            'webview_unbind': ['void', ['pointer', 'string']],
-            'webview_set_size': ['void', ['pointer', 'int', 'int', 'int']],
-            'webview_get_window': ['pointer', ['pointer']],
-            'webview_version': ['pointer', []],
-        });
-        this.webview = this.lib.webview_create(debug ? 1 : 0, target);
-        this.isDebug = debug;
+        this.callbacks = new Array();
+        this.isDebug = false;
+        this.lib = koffi.load(libPath);
+        this.funcs = {
+            'webview_create': this.lib.func('webview_create', 'void *', ['int', 'void *']),
+            'webview_run': this.lib.func('webview_run', 'void', ['void *']),
+            'webview_terminate': this.lib.func('webview_terminate', 'void', ['void *']),
+            'webview_destroy': this.lib.func('webview_destroy', 'void', ['void *']),
+            'webview_set_title': this.lib.func('webview_set_title', 'void', ['void *', 'string']),
+            'webview_set_html': this.lib.func('webview_set_html', 'void', ['void *', 'string']),
+            'webview_navigate': this.lib.func('webview_navigate', 'void', ['void *', 'string']),
+            'webview_init': this.lib.func('webview_init', 'void', ['void *', 'string']),
+            'webview_eval': this.lib.func('webview_eval', 'void', ['void *', 'string']),
+            'webview_dispatch': this.lib.func('webview_dispatch', 'void', ['void *', koffi.pointer(DispatchCallback)]),
+            'webview_bind': this.lib.func('webview_bind', 'void', ['void *', 'string', koffi.pointer(BindCallback), 'string']),
+            'webview_return': this.lib.func('webview_return', 'void', ['void *', 'string', 'int', 'string']),
+            'webview_unbind': this.lib.func('webview_unbind', 'void', ['void *', 'string']),
+            'webview_set_size': this.lib.func('webview_set_size', 'void', ['void *', 'int', 'int', 'int']),
+            'webview_get_window': this.lib.func('webview_get_window', 'void *', ['void *']),
+            'webview_version': this.lib.func('webview_version', 'void *', []),
+        };
+        this.create(debug, target);
+    }
+    create(debug = false, target = null) {
+        this.webview = this.funcs.webview_create(debug ? 1 : 0, target);
         if (!this.webview) {
+            this.webview = null;
             throw new Error("Failed to create webview");
         }
+        this.isDebug = debug;
     }
     /**
      * Updates the title of the native window.
@@ -87,7 +91,7 @@ class Webview {
      * @param v the new title
      */
     title(v) {
-        this.lib.webview_set_title(this.webview, v);
+        this.funcs.webview_set_title(this.webview, v);
     }
     /**
      * Navigates webview to the given URL
@@ -97,7 +101,7 @@ class Webview {
      * @param url the URL or URI
      * */
     navigate(url) {
-        this.lib.webview_navigate(this.webview, url);
+        this.funcs.webview_navigate(this.webview, url);
     }
     /**
      * Set webview HTML directly.
@@ -105,7 +109,7 @@ class Webview {
      * @param v the HTML content
      */
     html(v) {
-        this.lib.webview_set_html(this.webview, v);
+        this.funcs.webview_set_html(this.webview, v);
     }
     /**
     * Updates the size of the native window.
@@ -115,7 +119,7 @@ class Webview {
     * @param hints can be one of `NONE(=0)`, `MIN(=1)`, `MAX(=2)` or `FIXED(=3)`
     */
     size(width, height, hints = SizeHint.None) {
-        this.lib.webview_set_size(this.webview, width, height, hints);
+        this.funcs.webview_set_size(this.webview, width, height, hints);
     }
     /**
     * Injects JS code at the initialization of the new page.
@@ -125,7 +129,7 @@ class Webview {
     * @param js the JS code
     */
     init(js) {
-        this.lib.webview_init(this.webview, js);
+        this.funcs.webview_init(this.webview, js);
     }
     /**
      * Evaluates arbitrary JS code in browser.
@@ -135,7 +139,7 @@ class Webview {
      * @param js the JS code
      */
     eval(js) {
-        this.lib.webview_eval(this.webview, js);
+        this.funcs.webview_eval(this.webview, js);
     }
     /**
      * Binds a native NodeJS callback so that it will appear under the given name as a global webview's JS function.
@@ -146,12 +150,12 @@ class Webview {
      * @param fn the callback function receives the request parameter in webview browser and return the response(=[isSuccess,result]), both in JSON string. If isSuccess=false, it wll reject the Promise.
      */
     bindRaw(name, fn) {
-        let callback = (0, ffi_napi_1.Callback)('void', ['string', 'string', 'pointer'], (seq, req, _arg) => {
+        const callback = koffi.register((seq, req, _arg) => {
             const [isError, result] = fn(this, req);
-            this.lib.webview_return(this.webview, seq, isError, result);
-        });
-        this.lib.webview_bind(this.webview, name, callback, null);
-        process.on('exit', function () { callback; }); // Avoid GC
+            this.funcs.webview_return(this.webview, seq, isError, result);
+        }, koffi.pointer(BindCallback));
+        this.callbacks.push(callback); // for GC
+        this.funcs.webview_bind(this.webview, name, callback, null);
     }
     /**
     * Binds a Node.js callback so that it will appear under the given name as a global JS function in webview .
@@ -195,11 +199,11 @@ class Webview {
     * @param fn the function to be executed on the main thread.
     */
     dispatch(fn) {
-        let callback = (0, ffi_napi_1.Callback)('void', ['pointer', 'pointer'], (_, arg) => {
+        const callback = koffi.register((_w, _arg) => {
             fn(this);
-        });
-        this.lib.webview_dispatch(this.webview, callback);
-        process.on('exit', function () { callback; });
+        }, koffi.pointer(DispatchCallback));
+        this.callbacks.push(callback);
+        this.funcs.webview_dispatch(this.webview, callback);
     }
     /**
      * Removes a callback that was previously set by `webview_bind`.
@@ -207,12 +211,13 @@ class Webview {
      * @param name the name of JS function used in `webview_bind`
      */
     unbind(name) {
-        this.lib.webview_unbind(this.webview, name);
+        this.funcs.webview_unbind(this.webview, name);
     }
     /**
      * Runs the main loop and destroy it when terminated.
      *
      * This will block the thread. Functions like `setInterval` won't work.
+     * For workarounds, see https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds
      */
     show() {
         this.start();
@@ -225,7 +230,7 @@ class Webview {
      * This will block the thread.
      */
     start() {
-        this.lib.webview_run(this.webview);
+        this.funcs.webview_run(this.webview);
     }
     /**
      * Destroy the webview and close the native window.
@@ -233,7 +238,9 @@ class Webview {
      * You must destroy the webview after [run]
      */
     destroy() {
-        this.lib.webview_destroy(this.webview);
+        this.funcs.webview_destroy(this.webview);
+        this.callbacks.forEach((v) => koffi.unregister(v));
+        this.callbacks = [];
         this.webview = null;
     }
     /**
@@ -242,7 +249,7 @@ class Webview {
      * It is safe to call this function from other background thread.
      */
     terminate() {
-        this.lib.webview_terminate(this.webview);
+        this.funcs.webview_terminate(this.webview);
     }
     /**
      * **UNSAFE**: An unsafe pointer to the webview
@@ -262,10 +269,10 @@ class Webview {
      * pointer is `HWND` pointer. This API comes from webview_deno.
      */
     get unsafeWindowHandle() {
-        return this.lib.webview_get_window(this.webview);
+        return this.funcs.webview_get_window(this.webview);
     }
     get version() {
-        return this.lib.webview_version();
+        return this.funcs.webview_version();
     }
 }
 exports.Webview = Webview;

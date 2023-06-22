@@ -12,4 +12,4 @@ function main() {
 }
 
 import {test} from '@jest/globals'
-test('demo',main);
+test('helloworld',main);
