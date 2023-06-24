@@ -6,8 +6,30 @@ name: Node.js CI
 on: [push, pull_request]
 
 jobs:
-  build:
+  linux-ci:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: apt install libgtk-3-dev libwebkit2gtk-4.0-dev
+      - run: npm ci
+      - run: npm test ci
+
+  windows-ci:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/p/?LinkId=2124703" -OutFile "mswebview2setup.exe"; Start-Process -Wait -FilePath "mswebview2setup.exe" -ArgumentList "/install /silent"
+      - run: npm ci
+      - run: npm test ci
+
+  macos-ci:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
