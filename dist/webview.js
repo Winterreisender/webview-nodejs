@@ -26,19 +26,27 @@ var SizeHint;
  * @return the path to libwebview
 */
 function getLibraryPath() {
-    let dir = __dirname;
-    let arch = process.arch;
-    let platform = process.platform;
-    let libName = 'libwebview' + '.dll'; // TODO: LIB_EXT
-    if (platform == 'win32') {
-        libName = libName.replace(/^(lib)/, '');
+    const dir = __dirname;
+    const arch = process.arch;
+    const platform = process.platform;
+    let libName = '';
+    switch (platform) {
+        case 'darwin':
+            libName = 'libwebview.dylib';
+            break;
+        case 'linux':
+            libName = 'libwebview.so';
+            break;
+        case 'win32':
+            libName = 'webview.dll';
+            break;
+        default:
+            throw new Error(`Unsupported pattform: ${platform} ${arch}`);
     }
-    if (['linux', 'win32', 'darwin'].includes(platform) && arch == 'x64') {
-        return path_1.default.join(dir, 'libs', platform, arch, libName);
-    }
-    else {
+    if (arch !== 'x64') {
         throw new Error(`Unsupported pattform: ${platform} ${arch}`);
     }
+    return path_1.default.join(dir, 'libs', platform, arch, libName);
 }
 exports.getLibraryPath = getLibraryPath;
 const DispatchCallback = koffi.proto('void DispatchCallback(void* webview, void* args)'); //  If the C function calls the callback later, the behavior is undefined
