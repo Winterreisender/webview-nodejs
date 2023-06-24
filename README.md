@@ -17,10 +17,17 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 ## Getting Started
 
-1. Install via npm
+0. Prerequisites
+
+Node.js `>= 12.22.0`  
+Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)  
+Linux: [webkitgtk2](https://webkitgtk.org/)
+
+
+1. Install webview-nodejs
 
 ```shell
-npm i webview-nodejs
+npm install webview-nodejs
 ```
 
 2. Import and use webview
@@ -35,7 +42,7 @@ w.navigate("https://example.com");
 w.show();
 ```
 
-For more examples like interacting between Node.js and webview and more detailed instructions see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
+For more examples like interacting between Node.js and webview and more detailed instructions, see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
 
 ## Help
 
