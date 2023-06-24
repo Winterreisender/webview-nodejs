@@ -17,10 +17,17 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 ## Getting Started
 
-1. Install via npm
+0. Prerequisites
+
+Node.js `>= 12.22.0`  
+Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)  
+Linux: [webkitgtk2](https://webkitgtk.org/)
+
+
+1. Install webview-nodejs
 
 ```shell
-npm i webview-nodejs
+npm install webview-nodejs
 ```
 
 2. Import and use webview
@@ -35,7 +42,7 @@ w.navigate("https://example.com");
 w.show();
 ```
 
-For more examples like interacting between Node.js and webview and more detailed instructions see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
+For more examples like interacting between Node.js and webview and more detailed instructions, see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
 
 ## Help
 
@@ -90,14 +97,13 @@ By making a contribution to this project, I certify that:
     this project or the open source license(s) involved.
 ```
 
-
 ## Credits
 
 | Project                                                                   | License                                                                             |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                          |
 | [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                     |
-| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)              |
+| [koffi](https://koffi.dev/)                                                  | [MIT](https://github.com/Koromix/rygel/blob/master/LICENSE.txt)                        |
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-style](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
 
 # License

@@ -1,5 +1,3 @@
-import { ForeignFunction } from 'ffi-napi';
-import { Pointer } from 'ref-napi';
 /** Window size hints */
 export declare enum SizeHint {
     /** Width and height are default size */
@@ -11,25 +9,6 @@ export declare enum SizeHint {
     /** Window size can not be changed by a user */
     Fixed = 3
 }
-export type webview_t = Pointer<unknown>;
-export type WebviewFFI = {
-    webview_create: ForeignFunction<webview_t, [number, Pointer<unknown>]>;
-    webview_run: ForeignFunction<void, [webview_t]>;
-    webview_terminate: ForeignFunction<void, [webview_t]>;
-    webview_destroy: ForeignFunction<void, [webview_t]>;
-    webview_set_title: ForeignFunction<void, [webview_t, string]>;
-    webview_set_html: ForeignFunction<void, [webview_t, string]>;
-    webview_navigate: ForeignFunction<void, [webview_t, string]>;
-    webview_init: ForeignFunction<void, [webview_t, string]>;
-    webview_eval: ForeignFunction<void, [webview_t, string]>;
-    webview_dispatch: ForeignFunction<void, [webview_t, Pointer<unknown>]>;
-    webview_bind: ForeignFunction<void, [webview_t, string, Pointer<(...args: ("string" | "pointer")[]) => void>, Pointer<unknown>]>;
-    webview_return: ForeignFunction<void, [webview_t, string, number, string]>;
-    webview_unbind: ForeignFunction<void, [webview_t, string]>;
-    webview_set_size: ForeignFunction<void, [webview_t, number, number, number]>;
-    webview_get_window: ForeignFunction<Pointer<unknown>, [webview_t]>;
-    webview_version: ForeignFunction<Pointer<unknown>, []>;
-};
 /**
  * Get lib's path from node_modules
  *
@@ -40,6 +19,8 @@ export type WebviewFFI = {
 export declare function getLibraryPath(): string;
 export declare class Webview {
     private lib;
+    private funcs;
+    private callbacks;
     private webview;
     private isDebug;
     /**
@@ -49,7 +30,8 @@ export declare class Webview {
      * @param libPath the path to lib(dll/so/dylib). If not set, it will use built in libs.
      * @param target the destination window handle. set it to null if you want to create a new window
      */
-    constructor(debug?: boolean, libPath?: string, target?: Pointer<unknown>);
+    constructor(debug?: boolean, libPath?: string, target?: null);
+    create(debug?: boolean, target?: null): void;
     /**
      * Updates the title of the native window.
      *
@@ -139,6 +121,7 @@ export declare class Webview {
      * Runs the main loop and destroy it when terminated.
      *
      * This will block the thread. Functions like `setInterval` won't work.
+     * For workarounds, see https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds
      */
     show(): void;
     /**
@@ -165,7 +148,7 @@ export declare class Webview {
      * This API comes from webview_deno.
      *
      */
-    get unsafeHandle(): webview_t;
+    get unsafeHandle(): any;
     /**
      * **UNSAFE**: An unsafe pointer to the webviews platform specific native window handle.
      *
@@ -174,6 +157,6 @@ export declare class Webview {
      * backend the pointer is `NSWindow` pointer, when using Win32 backend the
      * pointer is `HWND` pointer. This API comes from webview_deno.
      */
-    get unsafeWindowHandle(): Pointer<unknown>;
-    get version(): Pointer<unknown>;
+    get unsafeWindowHandle(): any;
+    get version(): any;
 }
