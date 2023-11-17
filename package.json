@@ -26,6 +26,7 @@
     "build": "tsc",
     "doc": "typedoc --readme README.md --out docs/tsdoc/ src/webview.ts",
     "test": "jest",
+    "inspect": "node --inspect=8888 ./test/main.js",
     "prepublish": "npm run build && npm run doc",
     "pretest": "npm run build"
   },

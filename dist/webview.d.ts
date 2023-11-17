@@ -23,6 +23,8 @@ export declare class Webview {
     private callbacks;
     private webview;
     private isDebug;
+    private webview_version_t;
+    private webview_version_info_t;
     /**
      * Create a webview.
      *
@@ -43,7 +45,7 @@ export declare class Webview {
     /**
      * Navigates webview to the given URL
      *
-     * URL may be a data URI, i.e. "data:text/text,...". It is often ok not to url-encode it properly, webview will re-encode it for you. Same as [navigate]
+     * URL may be a data URI, i.e. "data:text/text,...". It is often ok not to url-encode it properly, webview will re-encode it for you.
      *
      * @param url the URL or URI
      * */
@@ -158,5 +160,15 @@ export declare class Webview {
      * pointer is `HWND` pointer. This API comes from webview_deno.
      */
     get unsafeWindowHandle(): any;
-    get version(): any;
+    /**
+     *
+     * @returns the version info of the webview lib. For example:
+     * {
+     * version: { major: 0, minor: 11, patch: 0 },
+     * version_number: '0.11.0',
+     * pre_release: '',
+     * build_metadata: ''
+     * }
+     */
+    version(): any;
 }

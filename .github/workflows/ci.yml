@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - run: sudo apt install libgtk-3-dev libwebkit2gtk-4.0-dev
       - run: npm ci
       - run: npm test ci
@@ -23,7 +23,7 @@ jobs:
 #      - uses: actions/checkout@v3
 #      - uses: actions/setup-node@v3
 #        with:
-#          node-version: 18
+#          node-version: 20
 #      - run: Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/p/?LinkId=2124703" -OutFile "mswebview2setup.exe"; Start-Process -Wait -FilePath "mswebview2setup.exe" -ArgumentList "/install /silent"
 #      - run: npm ci
 #      - run: npm test ci
@@ -34,6 +34,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - run: npm ci
       - run: npm test ci

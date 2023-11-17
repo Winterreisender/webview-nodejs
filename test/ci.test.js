@@ -5,6 +5,7 @@ const { Webview } = require('webview-nodejs');
 
 function main() {
     let w = new Webview();
+    console.debug(w.version());
     // TODO: Add GUI Test in headless mode
 }
 

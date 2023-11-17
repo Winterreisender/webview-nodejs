@@ -18,8 +18,8 @@ function main() {
         w.eval(`alert(${r})`);         // `alert` will run in webview
         return r;                      // return to webview
     });
-    
-    w.show();
+    w.start();
+
 }
 
 test('basic_bind',main);
