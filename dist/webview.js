@@ -17,7 +17,7 @@ var SizeHint;
     SizeHint[SizeHint["Max"] = 2] = "Max";
     /** Window size can not be changed by a user */
     SizeHint[SizeHint["Fixed"] = 3] = "Fixed";
-})(SizeHint = exports.SizeHint || (exports.SizeHint = {}));
+})(SizeHint || (exports.SizeHint = SizeHint = {}));
 /**
  * Get lib's path from node_modules
  *

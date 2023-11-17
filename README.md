@@ -27,7 +27,8 @@ Linux: [webkitgtk2](https://webkitgtk.org/)
 1. Install webview-nodejs
 
 ```shell
-npm install webview-nodejs@0.1.3
+npm install webview-nodejs
+# Try npm install webview-nodejs@0.1.3 for older version
 ```
 
 2. Import and use webview
@@ -102,9 +103,10 @@ By making a contribution to this project, I certify that:
 | Project                                                                   | License                                                                             |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                          |
-| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                     |
 | [koffi](https://koffi.dev/)                                                  | [MIT](https://github.com/Koromix/rygel/blob/master/LICENSE.txt)                        |
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-style](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
+
+This project is inspired by webview_deno
 
 # License
 

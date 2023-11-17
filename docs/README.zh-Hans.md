@@ -67,9 +67,10 @@ w.show();
 | 项目                                                                      | 许可                                                                                |
 | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                          |
-| [webview_deno](https://github.com/webview/webview_deno)                      | [MIT](https://github.com/webview/webview_deno/blob/master/LICENSE)                     |
-| [node-ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)              | [MIT](https://github.com/node-ffi-napi/node-ffi-napi/blob/master/LICENSE)              |
+| [koffi](https://koffi.dev/)                                                  | [MIT](https://github.com/Koromix/rygel/blob/master/LICENSE.txt)                        |
 | [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-style](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
+
+本项目的灵感来自 webview_deno
 
 ## 版权与许可
 
