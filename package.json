@@ -30,7 +30,7 @@
     "pretest": "npm run build"
   },
   "dependencies": {
-    "koffi": "^2.5.0"
+    "koffi": "^2.6.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
