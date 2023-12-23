@@ -1,0 +1,1 @@
+exports.libwebview = require('bindings')('libwebview');
