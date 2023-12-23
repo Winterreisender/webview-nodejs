@@ -27,8 +27,7 @@ Linux: [webkitgtk2](https://webkitgtk.org/)
 1. Install webview-nodejs
 
 ```shell
-npm install webview-nodejs@0.1.3
-# webview-nodejs@0.2 does not work with Linux and macOS, this is still to be solved.
+npm install webview-nodejs
 ```
 
 2. Import and use webview

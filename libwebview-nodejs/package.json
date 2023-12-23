@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "install": "cmake-js rebuild",
-    "start": "node test.mjs",
+    "start": "node test.js",
     "build": "cmake-js build",
     "rebuild": "cmake-js rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
