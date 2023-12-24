@@ -5,8 +5,7 @@
  * Do not make changes to this file unless you know what you are doing - modify
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
-
-
+#include <iostream>
 #define SWIG_VERSION 0x040200
 #define SWIGJAVASCRIPT
 /* -----------------------------------------------------------------------------
@@ -1599,23 +1598,38 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
   res1 = SWIG_ConvertPtr(info[0],SWIG_as_voidptrptr(&arg1), 0, 0);
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "webview_dispatch" "', argument " "1"" of type '" "webview_t""'"); 
-  }{
-    {
-      int res = SWIG_ConvertFunctionPtr(info[1], (void**)(&arg2), SWIGTYPE_p_f_p_void_p_void__void);
-      if (!SWIG_IsOK(res)) {
-        SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_dispatch" "', argument " "2"" of type '" "void (*)(webview_t,void *)""'"); 
-      }
-    }
   }
   res3 = SWIG_ConvertPtr(info[2],SWIG_as_voidptrptr(&arg3), 0, 0);
   if (!SWIG_IsOK(res3)) {
     SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "webview_dispatch" "', argument " "3"" of type '" "void *""'"); 
-  }webview_dispatch(arg1,arg2,arg3);
+  }
+
+  // -----Manual Modified-----
+  if (!info[1].IsFunction()) {
+    int res = SWIG_ConvertFunctionPtr(info[1], (void**)(&arg2), SWIGTYPE_p_f_p_void_p_void__void);
+    SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_dispatch" "', argument " "2"" of type '" "void (*)(webview_t,void *)""'"); 
+  }
+
+  const auto cb = new std::function<void()> (
+    [&]() {
+      std::cout << 1;
+      info[1].As<Napi::Function>().Call({});
+      std::cout << 2;
+    }
+  );
+  info[1].As<Napi::Function>().Call({});
+//  webview_dispatch(
+//    arg1,
+//    [](webview_t w, void* arg){
+//      (*((std::function<void()>*) (arg))) ();
+//
+//      // delete arg;
+//    },
+//    (void*)cb
+//  );
+  // -------------------------
+
   jsresult = env.Undefined();
-  
-  
-  
-  
   return jsresult;
   
   goto fail;
