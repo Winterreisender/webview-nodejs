@@ -4,7 +4,6 @@
   "description": "webview build by swig and cmake-js",
   "main": "index.js",
   "files": [
-    "include/",
     "src/",
     "CmakeLists.txt"
   ],

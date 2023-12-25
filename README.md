@@ -19,16 +19,20 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 0. Prerequisites
 
-Node.js `>= 12.22.0`  
-Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)  
-Linux: [webkitgtk2](https://webkitgtk.org/)
+Node.js `>= 12`  
+Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools  
+Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
+macOS: XCode
 
 
 1. Install webview-nodejs
 
 ```shell
-npm install webview-nodejs
+npm install webview-nodejs@0.4.0
 ```
+
+> v0.4.0 uses new SWIG and NAPI technologies and are not widely tested,
+> You can still use webview-nodejs@0.1.5 powered by ffi-api with the same API.
 
 2. Import and use webview
 
