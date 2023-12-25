@@ -106,13 +106,12 @@ export class Webview {
      * @param fn the callback function receives the request parameter in webview browser and return the response(=[isSuccess,result]), both in JSON string. If isSuccess=false, it wll reject the Promise.
      */
     bindRaw(name :string, fn :(w: Webview, req :string)=>[number,string]) {       
-        throw "Not Implemeted";
-        // let callback = Callback('void',['string','string','pointer'], (seq,req,_arg) => {
-        //     const [isError,result] = fn(this,req)
-        //     libwebview.webview_return(this.webview ,seq,isError,result);
-        // });
-        // libwebview.webview_bind(this.webview , name, callback, null);
-        // process.on('exit', function() { callback; }); // Avoid GC
+        let callback = (seq :string,req :string, _arg :string) => {
+            const [isError,result] = fn(this,req)
+            libwebview.webview_return(this.webview ,seq,isError,result);
+        };
+        libwebview.webview_bind(this.webview, name, null, callback);
+        process.on('exit', function() { callback; }); // Avoid GC
     }
 
     /**
@@ -237,8 +236,5 @@ export class Webview {
         return libwebview.webview_get_window(this.webview );
     }
 
-    get version() {
-        return libwebview.webview_version(this.webview, )
-    }
 }
 
