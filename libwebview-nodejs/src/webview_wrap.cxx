@@ -1319,6 +1319,7 @@ template <typename T> T SwigValueInit() {
 
 
 #include "webview.h"
+#include <typeinfo>
 
 
 SWIGINTERN
@@ -1590,7 +1591,8 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
   void *arg3 = (void *) 0 ;
   int res1 ;
   int res3 ;
-  
+  Napi::FunctionReference* jsCallback;
+
   if(static_cast<int>(info.Length()) < 3 || static_cast<int>(info.Length()) > 3) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_webview_dispatch.");
   }
@@ -1610,23 +1612,17 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
     SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_dispatch" "', argument " "2"" of type '" "void (*)(webview_t,void *)""'"); 
   }
 
-  const auto cb = new std::function<void()> (
-    [&]() {
-      std::cout << 1;
-      info[1].As<Napi::Function>().Call({});
-      std::cout << 2;
-    }
+  jsCallback = new Napi::FunctionReference(Napi::Persistent(info[1].As<Napi::Function>()));
+  jsCallback->SuppressDestruct();
+
+  webview_dispatch(
+    arg1,
+    [](webview_t w, void* arg){
+      auto f = (Napi::FunctionReference*) (arg);
+      f->Call({});
+    },
+    (void*) jsCallback
   );
-  info[1].As<Napi::Function>().Call({});
-//  webview_dispatch(
-//    arg1,
-//    [](webview_t w, void* arg){
-//      (*((std::function<void()>*) (arg))) ();
-//
-//      // delete arg;
-//    },
-//    (void*)cb
-//  );
   // -------------------------
 
   jsresult = env.Undefined();
@@ -1890,6 +1886,11 @@ fail:
 }
 
 
+struct BindArg {
+  Napi::FunctionReference f;
+  Napi::Env env;
+};
+
 // js_global_function
 Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
@@ -1903,6 +1904,7 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
   char *buf2 = 0 ;
   int alloc2 = 0 ;
   int res4 ;
+  BindArg* cb;
   
   if(static_cast<int>(info.Length()) < 4 || static_cast<int>(info.Length()) > 4) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_webview_bind.");
@@ -1911,22 +1913,36 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
   res1 = SWIG_ConvertPtr(info[0],SWIG_as_voidptrptr(&arg1), 0, 0);
   if (!SWIG_IsOK(res1)) {
     SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "webview_bind" "', argument " "1"" of type '" "webview_t""'"); 
-  }res2 = SWIG_AsCharPtrAndSize(info[1], &buf2, NULL, &alloc2);
+  }
+  res2 = SWIG_AsCharPtrAndSize(info[1], &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "webview_bind" "', argument " "2"" of type '" "char const *""'");
   }
-  arg2 = reinterpret_cast< char * >(buf2);{
-    {
-      int res = SWIG_ConvertFunctionPtr(info[2], (void**)(&arg3), SWIGTYPE_p_f_p_q_const__char_p_q_const__char_p_void__void);
-      if (!SWIG_IsOK(res)) {
-        SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_bind" "', argument " "3"" of type '" "void (*)(char const *,char const *,void *)""'"); 
-      }
-    }
+  arg2 = reinterpret_cast< char * >(buf2);
+  // -----Manual Modified-----
+  // TODO: Use unique_ptr
+  if (!info[3].IsFunction()) {
+    int res = SWIG_ConvertFunctionPtr(info[1], (void**)(&arg3), SWIGTYPE_p_f_p_void_p_void__void);
+    SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_bind" "', argument " "3"" of type '" "void (*)(const char*,const char*,void*)""'"); 
   }
-  res4 = SWIG_ConvertPtr(info[3],SWIG_as_voidptrptr(&arg4), 0, 0);
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "webview_bind" "', argument " "4"" of type '" "void *""'"); 
-  }webview_bind(arg1,(char const *)arg2,arg3,arg4);
+  Napi::FunctionReference(Napi::Persistent(info[3].As<Napi::Function>()));
+  cb = new BindArg {
+    Napi::FunctionReference(Napi::Persistent(info[3].As<Napi::Function>())),
+    env
+  };
+  cb->f.SuppressDestruct();
+
+  webview_bind(
+    arg1,
+    arg2,
+    [](const char *seq, const char *req, void *arg){
+      auto cb = (BindArg*) arg;
+      cb->f.Call({ Napi::String::New(cb->env, seq), Napi::String::New(cb->env, req) }); 
+    },
+    (void*) cb
+  );
+  // -------------------------
+  
   jsresult = env.Undefined();
   
   if (alloc2 == SWIG_NEWOBJ) delete[] buf2;

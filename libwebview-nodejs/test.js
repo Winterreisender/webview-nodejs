@@ -4,6 +4,7 @@ libwebview.webview_navigate(w,"https://example.com");
 
 libwebview.webview_eval(w,"1");
 libwebview.webview_dispatch(w, ()=>{console.log("Dispatch!!");}, null);
+libwebview.webview_bind(w, "foo",(seq,req)=>{console.log("Dispatch!!");}, null);
 libwebview.webview_run(w);
 libwebview.webview_destroy(w);
 
