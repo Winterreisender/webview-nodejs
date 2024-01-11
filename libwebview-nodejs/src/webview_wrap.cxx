@@ -1606,13 +1606,13 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
     SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "webview_dispatch" "', argument " "3"" of type '" "void *""'"); 
   }
 
-  // -----Manual Modified-----
+  // --------------------Manual Modified--------------------
   if (!info[1].IsFunction()) {
     int res = SWIG_ConvertFunctionPtr(info[1], (void**)(&arg2), SWIGTYPE_p_f_p_void_p_void__void);
     SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_dispatch" "', argument " "2"" of type '" "void (*)(webview_t,void *)""'"); 
   }
 
-  jsCallback = new Napi::FunctionReference(Napi::Persistent(info[1].As<Napi::Function>()));
+  jsCallback = new Napi::FunctionReference(Napi::Persistent(info[1].As<Napi::Function>())); // TODO: delete jsCallback
   jsCallback->SuppressDestruct();
 
   webview_dispatch(
@@ -1623,7 +1623,7 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
     },
     (void*) jsCallback
   );
-  // -------------------------
+  // -------------------------------------------------------
 
   jsresult = env.Undefined();
   return jsresult;
@@ -1885,11 +1885,13 @@ fail:
   return Napi::Value();
 }
 
-
+// --------------------Manual Modified--------------------
 struct BindArg {
   Napi::FunctionReference f;
   Napi::Env env;
 };
+// -------------------------------------------------------
+
 
 // js_global_function
 Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
@@ -1919,8 +1921,7 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "webview_bind" "', argument " "2"" of type '" "char const *""'");
   }
   arg2 = reinterpret_cast< char * >(buf2);
-  // -----Manual Modified-----
-  // TODO: Use unique_ptr
+  // --------------------Manual Modified--------------------
   if (!info[3].IsFunction()) {
     int res = SWIG_ConvertFunctionPtr(info[1], (void**)(&arg3), SWIGTYPE_p_f_p_void_p_void__void);
     SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_bind" "', argument " "3"" of type '" "void (*)(const char*,const char*,void*)""'"); 
@@ -1941,13 +1942,11 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
     },
     (void*) cb
   );
-  // -------------------------
+  // -------------------------------------------------------
   
   jsresult = env.Undefined();
   
   if (alloc2 == SWIG_NEWOBJ) delete[] buf2;
-  
-  
   
   return jsresult;
   
