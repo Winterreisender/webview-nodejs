@@ -17,24 +17,24 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 ## Getting Started
 
-0. Prerequisites
+1. Prerequisites
 
-Node.js `>= 12`  
+Common: `Node.js >= 12`, CMake (you can install via `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake`, please reopen your console after the installation)
 Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools  
 Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
 macOS: XCode
 
 
-1. Install webview-nodejs
+2. Install webview-nodejs
 
 ```shell
-npm install webview-nodejs@0.4.0
+npm install webview-nodejs
 ```
 
 > v0.4.0 uses new SWIG and NAPI technologies and are not widely tested,
 > You can still use webview-nodejs@0.1.5 powered by ffi-api with the same API.
 
-2. Import and use webview
+3. Import and use webview
 
 ```js
 const { Webview } = require('webview-nodejs');
@@ -56,62 +56,12 @@ For more examples like interacting between Node.js and webview and more detailed
 - [webview.dev](https://webview.dev/)
 - [Limitations and Workarounds](https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds)
 
-## Supported Platforms
-
-Build-in support:
-
-- win32 x64
-- linux x64
-- osx x64 and aarch64
-
-By loading lib manully, other architectures could be supported, you could find them [here](https://github.com/Winterreisender/webview-xmake/releases). Only windows-x64 and linux-x64 are tested.
-
-For more information, see [Prerequisites](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial#prerequisites).
 
 ## Contribution
 
 All suggestions, pull requests, issues, discussions and other contributions are welcome and appreciated.
 
-```plaintext
-Developer Certificate of Origin Version 1.1
-Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
-Everyone is permitted to copy and distribute verbatim copies of this
-license document, but changing it is not allowed.
-
-Developer's Certificate of Origin 1.1
-
-By making a contribution to this project, I certify that:
-(a) The contribution was created in whole or in part by me and I
-    have the right to submit it under the open source license
-    indicated in the file; or
-(b) The contribution is based upon previous work that, to the best
-    of my knowledge, is covered under an appropriate open source
-    license and I have the right under that license to submit that
-    work with modifications, whether created in whole or in part
-    by me, under the same open source license (unless I am
-    permitted to submit under a different license), as indicated
-    in the file; or
-(c) The contribution was provided directly to me by some other
-    person who certified (a), (b) or (c) and I have not modified
-    it.
-(d) I understand and agree that this project and the contribution
-    are public and that a record of the contribution (including all
-    personal information I submit with it, including my sign-off) is
-    maintained indefinitely and may be redistributed consistent with
-    this project or the open source license(s) involved.
-```
-
-## Credits
-
-| Project                                                                   | License                                                                             |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| [webview](https://github.com/webview/webview)                                | [MIT](https://github.com/webview/webview/blob/master/LICENSE)                          |
-| [koffi](https://koffi.dev/)                                                  | [MIT](https://github.com/Koromix/rygel/blob/master/LICENSE.txt)                        |
-| [Microsoft Webview2](https://www.nuget.org/packages/Microsoft.Web.WebView2/) | [BSD-style](https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.1245.22/License) |
-
-This project is inspired by webview_deno
-
-# License
+## License
 
 ```text
 Copyright 2022-2023 Winterreisender and other contributors.

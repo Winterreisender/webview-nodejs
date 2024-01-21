@@ -1,6 +1,6 @@
 {
   "name": "libwebview-nodejs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "webview build by swig and cmake-js",
   "main": "index.js",
   "files": [
