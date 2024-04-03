@@ -1,11 +1,11 @@
 {
   "name": "libwebview-nodejs",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "webview build by swig and cmake-js",
   "main": "index.js",
   "files": [
     "src/",
-    "CmakeLists.txt"
+    "CMakeLists.txt"
   ],
   "scripts": {
     "install": "cmake-js rebuild",
