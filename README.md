@@ -51,8 +51,8 @@ For more examples like interacting between Node.js and webview and more detailed
 ## Help
 
 - [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial)
-- [API Reference](https://winterreisender.github.io/webview-nodejs/jsdoc/index.html)
-- [API Reference (legacy)](https://winterreisender.github.io/webview-nodejs/tsdoc/index.html)
+- [API Reference](https://winterreisender.github.io/webview-nodejs/docs/jsdoc/index.html)
+- [API Reference (legacy)](https://winterreisender.github.io/webview-nodejs/docs/tsdoc/index.html)
 - [Examples](https://github.com/Winterreisender/webview-nodejs/tree/master/test/)
 - [webview.dev](https://webview.dev/)
 - [Limitations and Workarounds](https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds)
