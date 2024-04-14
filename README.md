@@ -18,10 +18,10 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 1. Prerequisites
 
-Common: `Node.js >= 12`, CMake (you can install via `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake`, please reopen your console after the installation)
-Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools  
-Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
-macOS: XCode
+- Common: `Node.js >= 12`, CMake (you can install it by `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake`, please reopen your console after the installation)
+- Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools or Visual Studio with C++ support  
+- Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
+- macOS: XCode
 
 
 2. Install webview-nodejs
@@ -51,7 +51,6 @@ For more examples like interacting between Node.js and webview and more detailed
 
 - [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial)
 - [API Reference](https://winterreisender.github.io/webview-nodejs/docs/jsdoc/index.html)
-- [API Reference (legacy)](https://winterreisender.github.io/webview-nodejs/docs/tsdoc/index.html)
 - [Examples](https://github.com/Winterreisender/webview-nodejs/tree/master/test/)
 - [webview.dev](https://webview.dev/)
 - [Limitations and Workarounds](https://github.com/Winterreisender/webview-nodejs/wiki/Limitations-and-Workarounds)
@@ -59,7 +58,8 @@ For more examples like interacting between Node.js and webview and more detailed
 
 ## Contribution
 
-All suggestions, pull requests, issues, discussions and other contributions are welcome and appreciated.
+All suggestions, pull requests, issues, discussions and other contributions are welcome and appreciated.  
+[![](https://opencollective.com/Winterreisender/webview-nodejs.svg?width=890&button=false)](https://github.com/Winterreisender/webview-nodejs/graphs/contributors)
 
 ## License
 
