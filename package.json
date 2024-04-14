@@ -23,15 +23,16 @@
     "webui"
   ],
   "scripts": {
+    "doc": "jsdoc src/webview.js -d docs/jsdoc -c jsdoc.json",
     "test": "jest",
     "inspect": "node --inspect=8888 ./test/main.js",
-    "prepublish": "",
-    "pretest": ""
+    "prepublish": "npm run doc"
   },
   "dependencies": {
     "libwebview-nodejs": "0.1.0"
   },
   "devDependencies": {
+    "jsdoc": "^4.0.2",
     "jest": "^29.0.2"
   },
   "engines": {
