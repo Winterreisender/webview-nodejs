@@ -18,7 +18,8 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 1. Prerequisites
 
-- Common: `Node.js >= 12`, CMake (you can install it by `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake`, please reopen your console after the installation)
+- `Node.js >= 12`
+- CMake, you can install it by `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake` (please reopen your console after the installation)
 - Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools or Visual Studio with C++ support  
 - Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
 - macOS: XCode
