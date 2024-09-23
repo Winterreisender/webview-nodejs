@@ -4,7 +4,7 @@
 ![npm (tag)](https://img.shields.io/npm/v/webview-nodejs/next)
 ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest)
 ![npm download](https://img.shields.io/npm/dt/webview-nodejs)
-![last commit](https://img.shields.io/github/last-commit/Winterreisender/webviewko)
+![last commit](https://img.shields.io/github/last-commit/Winterreisender/webview-nodejs)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs?ref=badge_shield)
 
