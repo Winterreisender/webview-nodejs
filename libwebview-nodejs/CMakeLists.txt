@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.16)
 cmake_policy(SET CMP0091 NEW)
 cmake_policy(SET CMP0042 NEW)
 set(CMAKE_CXX_STANDARD 14)
@@ -13,36 +13,20 @@ include_directories("include/")
 
 file(GLOB SOURCE_FILES "src/*.cxx")
 
-add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
-set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
-target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB})
-
 if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
   execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
-
-  include(FetchContent)
-  FetchContent_Declare(
-    webview2
-    URL https://globalcdn.nuget.org/packages/microsoft.web.webview2.1.0.2151.40.nupkg
-  )
-  FetchContent_MakeAvailable(webview2)
-  set(WEBVIEW2_INCLUDE_DIR ${webview2_SOURCE_DIR}/build/native/include/)
-  include_directories(${WEBVIEW2_INCLUDE_DIR})
 endif()
 
 
-if(CMAKE_SYSTEM_NAME MATCHES "Linux")
-  find_package(PkgConfig REQUIRED)
-  pkg_check_modules(webkit2gtk REQUIRED IMPORTED_TARGET gtk+-3.0 webkit2gtk-4.0)
-  target_link_libraries(${PROJECT_NAME} PRIVATE PkgConfig::webkit2gtk)
-endif()
+include(FetchContent)
+
+FetchContent_Declare(
+    webview
+    GIT_REPOSITORY https://github.com/webview/webview
+    GIT_TAG 0.12.0)
+FetchContent_MakeAvailable(webview)
 
 
-if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    find_library(WebKit WebKit)
-    if (NOT WebKit)
-        message(FATAL_ERROR "WebKit not found")
-    endif()
-
-    target_link_libraries(${PROJECT_NAME} ${WebKit})
-endif()
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
+set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
+target_link_libraries(${PROJECT_NAME} ${CMAKE_JS_LIB} webview::core)

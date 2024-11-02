@@ -1,0 +1,3 @@
+[submodule "libwebview-nodejs/include/webview"]
+	path = libwebview-nodejs/include/webview
+	url = https://github.com/webview/webview
