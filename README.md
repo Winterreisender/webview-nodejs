@@ -23,6 +23,7 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 - Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools or Visual Studio with C++ support  
 - Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
 - macOS: XCode
+For more information, see [webview#prerequisites](https://github.com/webview/webview#prerequisites)
 
 
 2. Install webview-nodejs
