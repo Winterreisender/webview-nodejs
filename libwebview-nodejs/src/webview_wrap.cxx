@@ -1632,7 +1632,7 @@ Napi::Value _wrap_webview_dispatch(const Napi::CallbackInfo &info) {
     SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_dispatch" "', argument " "2"" of type '" "void (*)(webview_t,void *)""'"); 
   }
 
-  jsCallback = new Napi::FunctionReference(Napi::Persistent(info[1].As<Napi::Function>())); // TODO: delete jsCallback
+  jsCallback = new Napi::FunctionReference(Napi::Persistent(info[1].As<Napi::Function>())); 
   jsCallback->SuppressDestruct();
 
   webview_dispatch(

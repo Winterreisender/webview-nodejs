@@ -110,12 +110,9 @@ export class Webview {
     * @param fn the function to be executed on the main thread.
     */
     dispatch(fn) {
-        throw "Not Implemeted";
-        // let callback = Callback('void',['pointer','pointer'], (_,arg) => {
-        //     fn(this);
-        // });
-        // libwebview.webview_dispatch(this.webview ,callback);
-        // process.on('exit', function() { callback; });
+        let callback = (w,args)=>{fn(this)};
+        libwebview.webview_dispatch(this.webview, callback, null);
+        process.on('exit', function() { callback; });
     }
 
     /** Removes a callback that was previously set by `webview_bind`.
