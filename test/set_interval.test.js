@@ -5,7 +5,8 @@
  * Related: https://github.com/Winterreisender/webview-nodejs/discussions/7
  */
 
-const {Webview} = require('webview-nodejs')
+import {Webview} from '../src/webview.js';
+
 
 function main() {
     let w = new Webview(true);
@@ -20,5 +21,5 @@ function main() {
     w.show();
 }
 
-import {test} from '@jest/globals'
+import test from 'node:test';
 test("set_interval", main)

@@ -1,5 +1,4 @@
-import {Webview} from 'webview-nodejs';
-import {test} from '@jest/globals'
+import {Webview} from '../src/webview.js';
 
 function onButtonPressed(webview, arg) {
     if(arg.length <= 10) {
@@ -30,4 +29,5 @@ function main() {
     w.show();
 };
 
+import test from 'node:test';
 test("set_title", main)

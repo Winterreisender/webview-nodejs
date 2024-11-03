@@ -2,7 +2,8 @@
  * This example is provided by [Dirk Krause](https://github.com/dirkk0) with modifications.
  */
 
-const { Webview } = require("webview-nodejs");
+import {Webview} from '../src/webview.js';
+
 
 function main() {
   let html = `
@@ -45,4 +46,6 @@ function main() {
   w.show();
 }
 
+
+import test from 'node:test';
 test('keybinding',main);

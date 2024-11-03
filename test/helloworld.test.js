@@ -1,7 +1,8 @@
 /**
  * This is the simplest example shown in README
  */
-const { Webview } = require('webview-nodejs');
+import {Webview} from '../src/webview.js';
+
 
 function main() {
     let w = new Webview();
@@ -11,5 +12,5 @@ function main() {
     w.show();
 }
 
-import {test} from '@jest/globals'
+import test from 'node:test';
 test('helloworld',main);

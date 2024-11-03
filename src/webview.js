@@ -75,7 +75,7 @@ export class Webview {
             const [isError, result] = fn(this, req);
             libwebview.webview_return(this.webview, seq, isError, result);
         };
-        libwebview.webview_bind(this.webview, name, null, callback);
+        libwebview.webview_bind(this.webview, name, callback, null);
         process.on('exit', function () { callback; }); // Avoid GC
     }
 
@@ -175,7 +175,7 @@ export class Webview {
 
 
 /** Window size hints */
-const SizeHint = new Proxy(
+export const SizeHint = new Proxy(
     {
         /** Width and height are default size */
         None: 0,

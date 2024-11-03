@@ -1,10 +1,9 @@
-import {SizeHint, Webview} from 'webview-nodejs';
-import {test} from '@jest/globals'
+import {Webview} from '../src/webview.js';
 
 function makeWebview({url}) {
     let w = new Webview(true);
     w.title("Hello");
-    w.size(600,600,SizeHint.None);
+    w.size(600,600);
     w.navigate(url);
     w.dispatch((w)=>{
         w.title("World")
@@ -22,4 +21,5 @@ function main() {
     Promise.all([w1.show(),w2.show()]);
 }
 
+import test from 'node:test';
 test("multi_window", main)

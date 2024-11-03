@@ -1,5 +1,5 @@
-const {Webview} = require('webview-nodejs');
-import {test} from '@jest/globals'
+import {Webview} from '../src/webview.js';
+
 
 function main() {
     let w = new Webview(true);
@@ -22,5 +22,6 @@ function main() {
 
 }
 
+import test from 'node:test';
 test('basic_bind',main);
 

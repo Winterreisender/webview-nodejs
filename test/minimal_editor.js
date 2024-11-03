@@ -1,6 +1,7 @@
 'use strict';
 
-const { Webview } = require('webview-nodejs');
+import {Webview} from '../src/webview.js';
+
 const fs = require("fs");
 
 let w = null
