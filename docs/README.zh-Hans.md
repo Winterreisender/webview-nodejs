@@ -11,6 +11,10 @@
 
 [English](../README.md) | **中文(简体)**
 
+> **!! 警告 !!**  
+> 这份中文内容已经长时间没有进行维护,请以英文版为准
+> 维护一项真正意义的开源项目真的很困难,需要很多精力,尤其是失去初期那种兴趣之后
+
 一个[webview](https://github.com/webview/webview)的Node.js绑定。 [webview](https://github.com/webview/webview) 是一个小巧、跨平台的网页视图库，使用WebKit和Edge，可用以构建现代跨平台桌面软件。
 
 ![screenshot](screenshot/screenshot.webp)
