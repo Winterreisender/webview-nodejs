@@ -114,3 +114,5 @@ WebView2Loader.dll
 # Auto-generated Files
 dist/*.d.ts
 dist/*.js
+
+private/

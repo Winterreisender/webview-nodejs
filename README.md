@@ -55,7 +55,6 @@ For more examples like interacting between Node.js and webview and more detailed
 ## Contribution
 
 All suggestions, pull requests, issues, discussions and other contributions are welcome and appreciated.  
-[![](https://opencollective.com/Winterreisender/webview-nodejs.svg?width=890&button=false)](https://github.com/Winterreisender/webview-nodejs/graphs/contributors)
 
 ## License
 

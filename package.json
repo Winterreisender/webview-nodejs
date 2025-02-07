@@ -30,7 +30,8 @@
     "prepublish": "npm run doc"
   },
   "dependencies": {
-    "libwebview-nodejs": "0.12.0"
+    "libwebview-nodejs": "0.12.0",
+    "node-addon-api": "^8.3.0"
   },
   "devDependencies": {
     "jsdoc": "^4.0.2"
