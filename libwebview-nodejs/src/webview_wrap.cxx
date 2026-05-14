@@ -1974,6 +1974,7 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
   char *buf2 = 0 ;
   int alloc2 = 0 ;
   int res4 ;
+  BindArg* cb;
   
   if(static_cast<int>(info.Length()) < 4 || static_cast<int>(info.Length()) > 4) {
     SWIG_Error(SWIG_ERROR, "Illegal number of arguments for _wrap_webview_bind.");
@@ -2005,7 +2006,7 @@ Napi::Value _wrap_webview_bind(const Napi::CallbackInfo &info) {
     int res = SWIG_ConvertFunctionPtr(info[2], (void**)(&arg3), SWIGTYPE_p_f_p_q_const__char_p_q_const__char_p_void__void);
     SWIG_exception_fail(SWIG_ArgError(res), "in method '" "webview_bind" "', argument " "3"" of type '" "void (*)(char const *,char const *,void *)""'"); 
   }
-  BindArg* cb = new BindArg {
+  cb = new BindArg {
     Napi::FunctionReference(Napi::Persistent(info[2].As<Napi::Function>())),
     env
   };
