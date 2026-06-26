@@ -26,6 +26,12 @@ FetchContent_Declare(
     GIT_TAG 0.12.0)
 FetchContent_MakeAvailable(webview)
 
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+  if(DEFINED ENV{WEBVIEW_WEBKITGTK_API})
+      target_compile_definitions(${PROJECT_NAME} PRIVATE 
+          CDWEBVIEW_WEBKITGTK_API="$ENV{WEBVIEW_WEBKITGTK_API}"
+      )
+endif()
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")

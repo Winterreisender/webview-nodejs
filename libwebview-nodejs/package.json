@@ -1,6 +1,6 @@
 {
   "name": "libwebview-nodejs",
-  "version": "0.12.1",
+  "version": "0.12.2-dev.1",
   "description": "webview build by swig and cmake-js",
   "main": "index.js",
   "files": [
@@ -8,10 +8,10 @@
     "CMakeLists.txt"
   ],
   "scripts": {
-    "install": "cmake-js rebuild --CDWEBVIEW_WEBKITGTK_API=\"$WEBVIEW_WEBKITGTK_API\"",
+    "install": "cmake-js rebuild",
     "start": "node test.js",
-    "build": "cmake-js build --CDWEBVIEW_WEBKITGTK_API=\"$WEBVIEW_WEBKITGTK_API\"",
-    "rebuild": "cmake-js rebuild --CDWEBVIEW_WEBKITGTK_API=\"$WEBVIEW_WEBKITGTK_API\"",
+    "build": "cmake-js build",
+    "rebuild": "cmake-js rebuild",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
