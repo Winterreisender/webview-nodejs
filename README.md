@@ -14,33 +14,32 @@ A Node.js binding and wrapper for [webview](https://github.com/webview/webview),
 
 ## Getting Started
 
-1. Prerequisites  
+1. Prerequisites: [webview#prerequisites](https://github.com/webview/webview#prerequisites)
 
-    - Common: Node.js 12 or later, CMake   
-    (you can install cmake by `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake` ,please reopen your console after the installation)
-    - Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools or Visual Studio with C++ support  
-    - Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
-    - macOS: XCode  
-    - For more information, see [webview#prerequisites](https://github.com/webview/webview#prerequisites)
+<!-- 
+- Common: Node.js 12 or later, CMake   
+(you can install cmake by `winget install Kitware.CMake`, `apt install cmake` or `brew install cmake` ,please reopen your console after the installation)
+- Windows: [Webview 2 Runtime](https://developer.microsoft.com/en-us/microsoft-edge/webview2/), Visual Studio Build Tools or Visual Studio with C++ support  
+- Linux: [webkitgtk2](https://webkitgtk.org/), gcc  
+- macOS: XCode  
+-->
 
-
-2. Install webview-nodejs
-
-```shell
-npm install webview-nodejs
-```
+2. Install webview-nodejs  
+    ```sh
+    npm install webview-nodejs
+    ```
+    [Compiler flags](https://github.com/webview/webview#package-consumer-options) including `WEBVIEW_WEBKITGTK_API`, `WEBVIEW_MSWEBVIEW2_VERSION` are avalivable as environment variables during the installation.
 
 3. Import and use webview
+    ```js
+    const { Webview } = require('webview-nodejs');
 
-```js
-const { Webview } = require('webview-nodejs');
-
-let w = new Webview();
-w.title("Hello World");
-w.size(800,600);
-w.navigate("https://example.com");
-w.show();
-```
+    let w = new Webview();
+    w.title("Hello World");
+    w.size(800,600);
+    w.navigate("https://example.com");
+    w.show();
+    ```
 
 For more examples like interacting between Node.js and webview and more detailed instructions, see [Tutorial](https://github.com/Winterreisender/webview-nodejs/wiki/Tutorial).
 
