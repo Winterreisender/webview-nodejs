@@ -4,7 +4,6 @@
 [![npm version@next](https://img.shields.io/npm/v/webview-nodejs/next)](https://www.npmjs.com/package/webview-nodejs)
 ![npm bundle size (version)](https://img.shields.io/bundlephobia/min/webview-nodejs/latest)
 ![npm download](https://img.shields.io/npm/dt/webview-nodejs)
-![Work with Bun](https://img.shields.io/badge/work_with-Bun-yellow?logo=bun)
 ![license](https://img.shields.io/github/license/Winterreisender/webviewko?color=3DA639)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FWinterreisender%2Fwebview-nodejs?ref=badge_shield)
 
